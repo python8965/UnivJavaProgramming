@@ -6,11 +6,13 @@ package univjavaprogramming;
 import java.util.Scanner;
 
 public class App {
-    public void print_calc(){
-
-    }
+    
 
     public static void main(String[] args) {
+        
+    }
+
+    public void week1(){
         int number = 20231975;
         String name = " 박성준";
         System.out.println(number + name);
@@ -26,9 +28,6 @@ public class App {
         //
 
         System.out.println(String.format("거스름돈 = %d", 50000 - 200 * 1 - 3000 * 2 - 4900 * 5));
-        
-       
-
         
 
         try (Scanner scanner = new Scanner(System.in)) {
