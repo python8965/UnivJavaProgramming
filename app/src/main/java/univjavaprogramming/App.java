@@ -9,62 +9,57 @@ public class App {
     
 
     public static void main(String[] args) {
-        
+        Challenge1();
     }
 
-    public void week1(){
-        int number = 20231975;
-        String name = " 박성준";
-        System.out.println(number + name);
+    public static void Challenge1(){
+        int hour, minute;
 
-        int a = 3;
-        double b = 10.123;
+        int currentMinute;
+        int alarmMinute = 9 * 60;
 
-        System.out.println(String.format("%d + %.3f = %.3f", a, b, a+b));
-        System.out.println(String.format("%d - %.3f = %.3f", a, b, a-b));
-        System.out.println(String.format("%d * %.3f = %.5f", a, b, a*b));
-        System.out.println(String.format("%d / %.3f = %.7f", a, b, a/b));
+        try (Scanner scanner = new Scanner(System.in)) { 
+            for (;;){
+                System.out.printf("현재 시간을 입력하세요 (HH 형식) : ");
+                hour = scanner.nextInt();
 
-        //
+                if (hour < 0 || hour > 24){
+                    System.out.println("시간은 0 ~ 24 사이로 입력해주셔야 합니다.");
+                    continue;
+                }
 
-        System.out.println(String.format("거스름돈 = %d", 50000 - 200 * 1 - 3000 * 2 - 4900 * 5));
-        
+                System.out.printf("현재 분을 입력하세요 (mm 형식) : ");
+                minute = scanner.nextInt();
 
-        try (Scanner scanner = new Scanner(System.in)) {
-            //
+                if (minute < 0 || minute > 60){
+                    System.out.println("분은 0 ~ 60 사이로 입력해주셔야 합니다.");
+                    continue;
+                }
 
-            int a0, b0;
-            System.out.print("두 정수를 입력하세요>> ");
-            a0 = scanner.nextInt();
-            b0 = scanner.nextInt();
-            
-            System.out.println(String.format("%d + %d = %d", a0, b0, a0+b0));
-            System.out.println(String.format("%d - %d = %d", a0, b0, a0-b0));
-            System.out.println(String.format("%d * %d = %d", a0, b0, a0*b0));
-            System.out.println(String.format("%d / %d = %d", a0, b0, a0/b0));
-            System.out.println(String.format("%d %% %d = %d", a0, b0, a0%b0));
-            //
-            System.out.print("원화를 입력하세요(단위 원)>>");
+                break;
+            }
 
-            double won = scanner.nextDouble();
-            double wontod = 1310.0;
+            currentMinute = hour * 60 + minute;
 
-            System.out.println(String.format("12000원은 $%.2f입니다.", won / wontod));
-            
-            //
-            
-            final double pi = 3.141592;
-            
-            System.out.print("구의 반지름 : ");
-            
-            double radius = scanner.nextDouble();
-            double volume = (4.0 / 3.0) * pi * Math.pow(radius, 3);
+            int resultMinuteDiff = currentMinute - alarmMinute;
 
-            System.out.println(String.format("구의 부피 = %.2f", volume));
-            
-            //
+            boolean sign = resultMinuteDiff > 0;
 
-            
+            int resultMinuteSum = Math.abs(resultMinuteDiff);
+
+            int resultHour = resultMinuteSum / 60;
+            int resultMinute = resultMinuteSum % 60;
+
+            if (resultMinuteSum == 0){
+                System.out.println("알람이 울리는 중입니다!");
+                return;
+            }
+
+            if (sign) {
+                System.out.printf("알람이 울린 후 %d시간 %d분 지났습니다.", resultHour, resultMinute);
+            } else {
+                System.out.printf("알람이 울리기까지 %d시간 %d분 남았습니다.", resultHour, resultMinute);
+            }
         }
     }
 }

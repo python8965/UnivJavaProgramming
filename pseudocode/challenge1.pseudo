@@ -1,0 +1,32 @@
+const alarmMinute = 9 * 60 + 0
+
+input {
+    @verify(in range(0, 24))
+    hour: int
+
+    @verify(in range(0, 60))
+    minute: int
+}
+
+inputToMinute = hour * 60 + minute
+
+resultMinuteDiff = inputToMinute - alarmMinute // 분으로 바꾼 시간의 차이
+sign = resultMinuteDiff > 0 // 차이의 부호
+
+resultMinuteSum = abs(resultMinuteDiff) // 부호만 남기고 값은 절대값
+
+resultHour = resultMinuteSum / 60
+resultMinute = resultMinuteSum % 60
+
+if (resultMinuteSum == 0){
+    output "알람이 울리는 중"
+}
+
+if (sign){
+    output "알람이 울린 후"
+} else {
+    output "알람이 울리기 전"
+}
+
+output resultHour
+output resultMinute
