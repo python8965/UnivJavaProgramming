@@ -3,13 +3,15 @@
  */
 package univjavaprogramming;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class App {
     
 
     public static void main(String[] args) {
-        Challenge1();
+        Challenge2();
+        //Practice.week3();
     }
 
     public static void Challenge1(){
@@ -59,6 +61,99 @@ public class App {
                 System.out.printf("알람이 울린 후 %d시간 %d분 지났습니다.", resultHour, resultMinute);
             } else {
                 System.out.printf("알람이 울리기까지 %d시간 %d분 남았습니다.", resultHour, resultMinute);
+            }
+        }
+    }
+
+    public static int randomRange(int start, int end){
+        return (int)(Math.random() * (end - start - 1)) + start;
+    }
+
+    public static void Challenge2(){
+        try (Scanner scanner = new Scanner(System.in)) { 
+            var inputLottoNumber = new int[6];
+            var lottoNumber = new int[6];
+
+            for (int i = 0; i < inputLottoNumber.length; i++) {
+                check : for (;;){
+                    var num = randomRange(1, 45);
+
+                    if (num < 1 || num > 45){
+                        continue;
+                    }
+
+                    for (int j : inputLottoNumber) {
+                        if (j == num){
+                            continue check;
+                        }
+                    }
+
+                    inputLottoNumber[i] = num;
+                    break;
+                }
+            }
+
+            for (int i = 0; i < lottoNumber.length; i++) {
+                System.out.print("로또 번호를 입력하세요 (1부터 45 사이의 숫자, 중복 없이) : ");
+
+                check : for (;;){
+                    var num = scanner.nextInt();
+
+                    if (num < 1 || num > 45){
+                        System.out.println("입력 숫자는 반드시 1~45 사이어야 합니다.");
+                        continue;
+                    }
+
+                    for (int j : lottoNumber) {
+                        if (j == num){
+                            System.out.println("입력 숫자는 중복되면 안됩니다.");
+                            System.out.print("로또 번호를 입력하세요 (1부터 45 사이의 숫자, 중복 없이) : ");
+
+                            continue check;
+                        }
+                    }
+
+                    lottoNumber[i] = num;
+                    break;
+                }
+            }
+
+
+            Arrays.sort(inputLottoNumber);
+            Arrays.sort(lottoNumber);
+
+            System.out.printf("당첨 번호: %s\n", Arrays.toString(lottoNumber));
+            System.out.printf("사용자 번호: %s\n", Arrays.toString(inputLottoNumber));
+
+            var correct = 0;
+
+            for (int i = 0; i < inputLottoNumber.length; i++) {
+                var num = inputLottoNumber[i];
+
+                for (int j : lottoNumber) {
+                    if (j == num){
+                        correct += 1;
+                        break;
+                    }
+                }
+            }
+
+            switch (correct) {
+                case 3:
+                    System.out.println("4등입니다.");
+                    break;
+                case 4:
+                    System.out.println("3등입니다!");
+                    break;
+                case 5:
+                    System.out.println("2등입니다!!");
+                    break;
+                case 6:
+                    System.out.println("1등입니다!!!");
+                    break;
+                default:
+                    System.out.printf("꽝입니다. 일치하는 번호가 %d개입니다.", correct);
+                    break;
             }
         }
     }

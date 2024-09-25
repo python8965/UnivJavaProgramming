@@ -3,6 +3,8 @@ package univjavaprogramming;
 import java.util.Scanner;
 
 public class Practice {
+
+
     public static void week1(){
         int number = 20231975;
         String name = " 박성준";
@@ -171,4 +173,101 @@ public class Practice {
             }
         }
     }
+
+    public static int[] generateRandomIntArray(int length){
+        var randomArray = new int[length];
+
+        for (int i = 0; i < length; i++) {
+            randomArray[i] = (int)(Math.random()*100 + 1);
+        }
+
+        return randomArray;
+    }
+
+    public static void week3(){
+        try (Scanner scanner = new Scanner(System.in)) { 
+            var array = new int[]{1, 2, 3, 4, 5};
+
+            for (int i = 0; i < array.length; i++) {
+                System.out.printf("인덱스 %d: %d\n", i, array[i]);
+            }
+
+            String course [] = { "객체지향", "프로그래밍", "알고리즘", "자료구조", "컴퓨터구조" };
+            char score [] = {'A', 'B', 'B', 'C', 'D'};
+        
+            ////////////////////
+
+            String input = scanner.next();
+            while (!input.equals("종료")){
+                for (int i=0;i < course.length;i++){
+                    if (input.equals(course[i])){
+                        System.out.printf("%s의 학점은 %c\n", course[i], score[i]);
+                        break;
+                    }
+
+                    if (i == course.length-1){
+                        System.out.println("존재하지 않는 강의입니다.");
+                    }
+                }
+
+                input = scanner.next();
+            }
+
+            //////////////////////////////
+
+            int [] unit = {50000, 10000, 1000, 500, 100, 50, 10, 1}; // 환산할 돈의 종류
+            int[] amount = new int[unit.length];
+
+            System.out.print("금액을 입력하세요 >> ");
+            int value = scanner.nextInt();
+
+            for (int i = 0; i < unit.length; i++) { 
+                // unit이 내림차순 정렬되어있다고 가정
+                int p = value / unit[i];
+
+                amount[i] = p;
+                value -= p * unit[i];
+            }
+
+            //출력코드
+
+            //////////////////////////////
+
+            var randomArray = generateRandomIntArray(10);
+
+            System.out.println("생성된 배열:");
+
+            for (int i : randomArray) {
+                System.out.printf("%d ", i);
+            }
+
+            System.out.println();
+
+            /////////////////////
+
+            int[] arr = {4, 9, 39, 30, 10, 43};
+
+            for (int i = 0; i < arr.length-1; i++) {
+                for (int j = i+1; j < arr.length; j++) {
+                    if (arr[j] > arr[i]){
+                        var tmp = arr[i];
+                        arr[i] = arr[j];
+                        arr[j] = tmp; 
+                    }
+                }
+            }
+
+            printArray(arr);
+        }
+    }
+
+    public static void printArray(int[] arr) {
+
+        for (int i : arr) {
+            System.out.printf("%d ", i);
+        }
+
+
+    }
+    
 }
