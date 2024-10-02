@@ -5,12 +5,13 @@ package univjavaprogramming;
 
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 public class App {
     
 
     public static void main(String[] args) {
-        Challenge2();
+        Challenge3();
         //Practice.week3();
     }
 
@@ -156,5 +157,265 @@ public class App {
                     break;
             }
         }
+    }
+
+    public static void Challenge3(){
+
+        class  SeatPosition implements Comparable<SeatPosition> {
+            int row;
+            int col;
+
+            public SeatPosition(int row, int col) {
+                this.row = row;
+                this.col = col;
+            }
+
+            public SeatPosition(String string) throws RuntimeException{
+                boolean isProcessingRow = false;
+
+                var tempRow = 0;
+                var tempCol = 0;
+
+                for (char c : string.toCharArray()){
+                    int ci = (int) c;
+                    if (isProcessingRow){
+                        if (ci < 49 || ci > 57){
+                            throw new RuntimeException("문자열 "+string+"를 파싱하는 도중 에러 발생");
+                        }
+
+                        tempRow += ci - 49;
+                    } else {
+                        if (ci <65 | ci >90){
+                            if (ci >= 49 && ci <= 57){
+                               isProcessingRow = true;
+
+                               tempRow += ci - 49;
+                               continue;
+
+                            }
+                            throw new RuntimeException("문자열 "+string+"를 파싱하는 도중 에러 발생");
+                        }
+
+                        tempCol += ci - 65;
+                    }
+                }
+
+                this.row = tempRow;
+                this.col = tempCol;
+            }
+
+            public boolean  checkIsValid(int numRows, int numCols){
+                return !(row < 0 || row >= numRows || col < 0 || col >= numCols);
+            }
+
+            @Override
+            public String toString() {
+                if (col + 16 > (int)'Z'){
+                    
+                }
+
+                return String.valueOf((char)(col + 16)) + row;
+            }
+
+            
+
+            @Override
+            public int compareTo(SeatPosition o) {
+            
+                if(this.col > o.col) {
+                    return 1;
+                }
+
+                if(this.col == o.col) {
+                    if (this.row > o.row){
+                        return 1;
+                    } else if (this.row == o.row){
+                        return 0;
+                    } else {
+                        return -1;
+                    }
+                }
+
+                else {
+                    return -1;
+                }
+            }
+        }
+
+        // 자바 버전이 높다면...
+        /*
+        record SeatPosition {
+            int row;
+            int col;
+        } 이런 형식으로도 가능할 것 같습니다.
+         */
+
+        class Reservation {
+            SeatPosition position;
+            String name;
+            String phoneNumber;
+        }
+
+        
+
+        class MovieTheater {
+            int numRows;
+            int numCols;
+            
+            TreeMap<SeatPosition, Reservation> seat;
+
+
+            public MovieTheater(int numRows, int numCols){
+                this.numRows = numRows;
+                this.numCols = numCols;
+                seat = new TreeMap<>();
+            }
+
+            public void displaySeats(){
+                var keys = seat.keySet().iterator();
+
+                var nextPosition = keys.hasNext() ? keys.next() : null;
+
+                System.out.print("  ");
+
+                for (var i = 0; i < numRows; i++){ 
+                    System.out.printf("%d ", i+1);
+                }
+
+                for (var j = 0 ;j < numCols; j++){
+                    System.out.print(j + x);
+
+                    for (var i = 0; i < numRows; i++){
+
+                        if (nextPosition == null) {
+                            System.out.print("□ ");
+                        }
+
+                        var currentSeekPosition = new SeatPosition(i, j);
+
+                        if (nextPosition == currentSeekPosition ) {
+                            System.out.print("■ ");
+                            nextPosition = keys.hasNext() ? keys.next() : null;
+                        } else {
+                            System.out.print("□ ");
+                        }
+                    }
+                    System.out.println("");
+                }
+            }
+
+            public boolean reserveSeat(Reservation reservation){
+
+                
+                if (seat.containsKey(reservation.position)){
+                    System.err.println("빈 곳을 찾아 예약해주세요");
+                    return false;    
+                }
+
+
+                if (!reservation.position.checkIsValid(numRows, numCols)){
+                    System.err.printf("예약할 좌석 범위는 A1 ~ %s 이내여야 합니다.\n", 
+                        new SeatPosition(numRows - 1, numCols - 1).toString());
+                    return false;
+                }
+
+                seat.put(reservation.position, reservation);
+
+                return true;
+            }
+
+            public boolean cancelReservation(SeatPosition position) {
+                if (!position.checkIsValid(numRows, numCols)){
+                    System.err.printf("삭제할 좌석 범위는 A1 ~ %s 이내여야 합니다.\n", 
+                        new SeatPosition(numRows - 1, numCols - 1).toString());
+                    return false;
+                }
+
+                if (!seat.containsKey(position)){
+                    System.err.println("예약되지 않은 자리입니다. 다시 선택해주세요.");
+                    return false;    
+                }
+
+                seat.remove(position);
+
+                return true;
+            }
+
+            public void displayReservationInfo(String name) {
+                for (var reservation : seat.values()){
+                    if (reservation.name == name) {
+                        System.out.println("예약 정보 >> ");
+                        System.out.printf("좌석 : %s\n이름 : %s\n전화번호 : %s\n", 
+                            reservation.position.toString(), 
+                            reservation.name, 
+                            reservation.phoneNumber);
+                        return ;
+                    } 
+                }
+
+                System.err.printf("%s라는 이름은 없습니다.\n", name);
+            }
+        }
+
+        Scanner scanner = new Scanner(System.in);
+
+        MovieTheater movieTheater = new MovieTheater(10, 10);
+
+        exit: for (;;) {
+            System.out.printf("1. 좌석 조회\n2. 좌석 예약\n3. 좌석 예약 취소\n4. 예약 정보 조회\n5. 종료\n원하는 작업을 선택하세요 (1/2/3/4/5): ");
+            var selection = scanner.nextInt();
+
+            switch (selection) {
+                case 1:
+                    movieTheater.displaySeats();
+                    break;
+                case 2:
+                    System.out.print("예약 화면입니다. ");
+
+                    Reservation reservation = new Reservation();
+
+                    System.out.print("예약하고 싶은 좌석의 번호/이름/전화번호 순으로 입력하주세요. (예: A2/홍길동/123-4567)");
+
+                    try {
+                        var str=  scanner.next();
+                        var splitted = str.split("/");
+
+                        reservation.position = new SeatPosition(splitted[0]);
+                        reservation.name = splitted[1];
+                        reservation.phoneNumber = splitted[2];
+
+                        movieTheater.reserveSeat(reservation);
+                    } catch (RuntimeException e) {
+                        System.err.println(e.getMessage());
+                    }
+                    break;
+                case 3:
+                    System.out.print("예약을 취소할 좌석을 입력하세요 (예: A2): ");
+                    try {
+                        var parsedPos = new SeatPosition(scanner.next());
+
+                        movieTheater.cancelReservation(parsedPos);
+                    } catch (RuntimeException e) {
+                        System.err.println(e.getMessage());
+                    }
+
+                    
+                    break;
+                case 4:
+                    System.out.print("조회하고 싶은 예약의 예약자명을 입력해주세요: ");
+
+
+
+                    movieTheater.displayReservationInfo(scanner.next());    
+
+                    break;
+                case 5:
+                    
+                    break exit;
+                default:
+                    throw new AssertionError();
+            }
+        }
+
     }
 }

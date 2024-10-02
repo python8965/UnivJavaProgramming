@@ -1,0 +1,29 @@
+// 로또 당첨 번호 생성
+input {
+    @verify(in range(1, 45), no duplicate)
+    inputLottoNumber: int[6]
+}
+
+lottoNumber = int[6]
+
+for number in lottoNumber:
+    @verify(no duplicate)
+    number = random(in range(1, 45))
+
+lottoNumber.sort()
+inputLottoNumber.sort()
+
+output lottoNumber // 로또 번호 출력
+
+correct: int
+
+for number in inputLottoNumber:
+    if (number in lottoNumber):
+        correct += 1
+
+switch correct:
+    3 => output "4등"
+    4 => output "3등"
+    5 => output "2등"
+    6 => output "1등"
+    defult => output "꽝"  
