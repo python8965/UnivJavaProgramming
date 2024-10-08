@@ -159,6 +159,10 @@ public class App {
         }
     }
 
+    public static char itoc(int toChar) {
+        return (char)(toChar + 16);
+    }
+
     public static void Challenge3(){
 
         class  SeatPosition implements Comparable<SeatPosition> {
@@ -169,6 +173,8 @@ public class App {
                 this.row = row;
                 this.col = col;
             }
+
+
 
             public SeatPosition(String string) throws RuntimeException{
                 boolean isProcessingRow = false;
@@ -208,13 +214,15 @@ public class App {
                 return !(row < 0 || row >= numRows || col < 0 || col >= numCols);
             }
 
+            
+
             @Override
             public String toString() {
                 if (col + 16 > (int)'Z'){
                     
                 }
 
-                return String.valueOf((char)(col + 16)) + row;
+                return String.valueOf(itoc(col)) + row;
             }
 
             
@@ -283,7 +291,7 @@ public class App {
                 }
 
                 for (var j = 0 ;j < numCols; j++){
-                    System.out.print(j + x);
+                    System.out.print(itoc(j));
 
                     for (var i = 0; i < numRows; i++){
 
