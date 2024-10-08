@@ -269,5 +269,56 @@ public class Practice {
 
 
     }
+
+    public static void week5() {
+        class Mytv {
+            private boolean isPowerOn;
+            private int channel;
+            private int volume;
+
+            final int MAX_VOLUME = 100;
+            final int MIN_VOLUME = 0;
+            final int MAX_CHANNEL = 100;
+            final int MIN_CHANNEL = 0;
+
+            public void setPowerOn(boolean powerOn) {
+                isPowerOn = powerOn;
+            }
+
+            public void setChannel(int channel) {
+                if (channel < MIN_CHANNEL || channel > MAX_CHANNEL) {
+                    return;
+                }
+
+                this.channel = channel;
+            }
+
+            public void setVolume(int volume) {
+                if (volume < MIN_VOLUME || volume > MAX_VOLUME) {
+                    return;
+                }
+
+                this.volume = volume;
+            }
+
+            public boolean isPowerOn() {
+                return isPowerOn;
+            }
+
+            public int getChannel() {
+                return channel;
+            }
+
+            public int getVolume() {
+                return volume;
+            }
+        }
+
+        Mytv mytv = new Mytv();
+        mytv.setChannel(10);
+        System.out.println("채녈 : "+ mytv.getChannel());
+        mytv.setVolume(10);
+        System.out.println("음량 :" + mytv.getVolume());
+    }
     
 }

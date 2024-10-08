@@ -11,8 +11,8 @@ public class App {
     
 
     public static void main(String[] args) {
-        Challenge3();
-        //Practice.week3();
+        //Challenge3();
+        Practice.week5();
     }
 
     public static void Challenge1(){
