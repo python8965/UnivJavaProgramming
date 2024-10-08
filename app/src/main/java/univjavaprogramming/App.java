@@ -426,4 +426,42 @@ public class App {
         }
 
     }
+
+    public static void Challenge4() {
+        class PacMan {
+
+        }
+
+        class Tile {
+
+        }
+        
+        class Position {
+            int x;
+            int y;
+
+            Position(int x, int y) {
+                this.x = x;
+                this.y = y;
+            }
+        }
+
+        enum Direction {
+            UP, DOWN,
+            RIGHT, LEFT
+        }
+
+        class Map {
+            Tile[][] mapData;
+
+            public Map(int width, int height) {
+                mapData = new Tile[height][width];
+            }
+
+            public Tile Peek(Position current, Direction direction) {
+
+            }
+            
+        }
+    }
 }
