@@ -1,5 +1,6 @@
 package univjavaprogramming;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Practice {
@@ -275,6 +276,7 @@ public class Practice {
             private boolean isPowerOn;
             private int channel;
             private int volume;
+            private int previous_channel; // 08 수정사항
 
             final int MAX_VOLUME = 100;
             final int MIN_VOLUME = 0;
@@ -289,6 +291,9 @@ public class Practice {
                 if (channel < MIN_CHANNEL || channel > MAX_CHANNEL) {
                     return;
                 }
+
+
+                this.previous_channel = this.channel; //08 수정사항
 
                 this.channel = channel;
             }
@@ -312,13 +317,128 @@ public class Practice {
             public int getVolume() {
                 return volume;
             }
+
+            // 08 수정사항
+            public void gotoPrevChannel() {
+                final var previous = this.previous_channel;
+
+                this.previous_channel = this.channel;
+
+                this.channel = previous;
+            }
         }
+
+        // 07
 
         Mytv mytv = new Mytv();
         mytv.setChannel(10);
         System.out.println("채녈 : "+ mytv.getChannel());
         mytv.setVolume(10);
         System.out.println("음량 :" + mytv.getVolume());
+
+        // 08
+
+        mytv.setChannel(20);
+        System.out.println("채녈 : " + mytv.getChannel());
+        mytv.gotoPrevChannel();
+        System.out.println("채녈 : " + mytv.getChannel());
+        mytv.gotoPrevChannel();
+        System.out.println("채녈 : " + mytv.getChannel());
+
+        // 09
+
+        class Product {
+            int price;
+
+            Product(int price){
+                this.price = price;
+            }
+        }
+
+        class SmartTv extends Product {
+            SmartTv(){
+                super(100);
+            }
+
+            public String toString(){
+                return "SmartTv";
+            }
+        }
+
+        class Computer extends Product {
+            Computer(){
+                super(200);
+            }
+
+            public String toString(){
+                return "Computer";
+            }
+        }
+
+        class Audio extends Product {
+            Audio(){
+                super(50);
+            }
+
+            public String toString(){
+                return "Audio";
+            }
+        }
+
+        class Buyer {
+            int money = 1000;
+            Product[] cart = new Product[3];
+            int i = 0;
+
+            void buy (Product product) {
+                if (product.price > money){
+                    System.out.println("잔액이 부족하여" + product.toString() + "을 살 수 없습니다.");
+                    return;
+                }
+
+                money -= product.price;
+
+                add(product);
+            }
+
+            void add(Product product) {
+                if (i >= cart.length) {
+                    var new_cart = Arrays.copyOf(cart, cart.length * 2);
+                    cart = new_cart;
+                }
+
+                cart[i] = product;
+                i++;
+            }
+
+            void summary() {
+                int used = 0;
+
+                for (Product product : cart) {
+                    if (product != null) {
+                        System.out.println(product.toString());
+                        used+= product.price;
+                    }
+
+
+                }
+
+                System.out.println("사용한 금액 : "+used);
+                System.out.println("남은 금액 : " + (money));
+
+            }
+        }
+
+        Buyer buyer = new Buyer();
+        buyer.buy(new SmartTv());
+        buyer.buy(new Computer());
+        buyer.buy(new Audio());
+        buyer.buy(new Audio());
+        buyer.buy(new Computer());
+        buyer.buy(new Computer());
+        buyer.buy(new Computer());
+        buyer.buy(new Computer());
+        buyer.summary();
     }
     
 }

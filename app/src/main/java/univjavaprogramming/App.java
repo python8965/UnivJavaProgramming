@@ -11,8 +11,8 @@ public class App {
     
 
     public static void main(String[] args) {
-        //Challenge3();
-        Practice.week5();
+        Challenge3();
+        //Practice.week5();
     }
 
     public static void Challenge1(){
@@ -159,8 +159,8 @@ public class App {
         }
     }
 
-    public static char itoc(int toChar) {
-        return (char)(toChar + 16);
+    public static char intToChar(int toChar) {
+        return (char)(toChar + 65);
     }
 
     public static void Challenge3(){
@@ -176,35 +176,15 @@ public class App {
 
 
 
-            public SeatPosition(String string) throws RuntimeException{
-                boolean isProcessingRow = false;
-
+            public SeatPosition(String string) throws RuntimeException {
                 var tempRow = 0;
                 var tempCol = 0;
 
-                for (char c : string.toCharArray()){
-                    int ci = (int) c;
-                    if (isProcessingRow){
-                        if (ci < 49 || ci > 57){
-                            throw new RuntimeException("문자열 "+string+"를 파싱하는 도중 에러 발생");
-                        }
+                // Input [A-Z][0-9] * n
 
-                        tempRow += ci - 49;
-                    } else {
-                        if (ci <65 | ci >90){
-                            if (ci >= 49 && ci <= 57){
-                               isProcessingRow = true;
+                tempCol = (int)string.charAt(0) - 65;
 
-                               tempRow += ci - 49;
-                               continue;
-
-                            }
-                            throw new RuntimeException("문자열 "+string+"를 파싱하는 도중 에러 발생");
-                        }
-
-                        tempCol += ci - 65;
-                    }
-                }
+                tempRow = Integer.parseInt(string.substring(1)) - 1;
 
                 this.row = tempRow;
                 this.col = tempCol;
@@ -214,22 +194,22 @@ public class App {
                 return !(row < 0 || row >= numRows || col < 0 || col >= numCols);
             }
 
-            
+
 
             @Override
             public String toString() {
                 if (col + 16 > (int)'Z'){
-                    
+
                 }
 
-                return String.valueOf(itoc(col)) + row;
+                return String.valueOf(intToChar(col)) + (row + 1);
             }
 
-            
+
 
             @Override
             public int compareTo(SeatPosition o) {
-            
+
                 if(this.col > o.col) {
                     return 1;
                 }
@@ -249,14 +229,6 @@ public class App {
                 }
             }
         }
-
-        // 자바 버전이 높다면...
-        /*
-        record SeatPosition {
-            int row;
-            int col;
-        } 이런 형식으로도 가능할 것 같습니다.
-         */
 
         class Reservation {
             SeatPosition position;
@@ -290,25 +262,30 @@ public class App {
                     System.out.printf("%d ", i+1);
                 }
 
+                System.out.println();
+
                 for (var j = 0 ;j < numCols; j++){
-                    System.out.print(itoc(j));
+                    System.out.print(intToChar(j));
+                    System.out.print(" ");
 
                     for (var i = 0; i < numRows; i++){
 
                         if (nextPosition == null) {
                             System.out.print("□ ");
-                        }
-
-                        var currentSeekPosition = new SeatPosition(i, j);
-
-                        if (nextPosition == currentSeekPosition ) {
-                            System.out.print("■ ");
-                            nextPosition = keys.hasNext() ? keys.next() : null;
                         } else {
-                            System.out.print("□ ");
+
+                            var currentSeekPosition = new SeatPosition(i, j);
+
+                            if (nextPosition.compareTo(currentSeekPosition) == 0) {
+                                System.out.print("■ ");
+                                nextPosition = keys.hasNext() ? keys.next() : null;
+                            } else {
+                                System.out.print("□ ");
+                            }
                         }
                     }
-                    System.out.println("");
+
+                    System.out.println();
                 }
             }
 
@@ -351,7 +328,7 @@ public class App {
 
             public void displayReservationInfo(String name) {
                 for (var reservation : seat.values()){
-                    if (reservation.name == name) {
+                    if (reservation.name.equals(name)) {
                         System.out.println("예약 정보 >> ");
                         System.out.printf("좌석 : %s\n이름 : %s\n전화번호 : %s\n", 
                             reservation.position.toString(), 
@@ -361,7 +338,7 @@ public class App {
                     } 
                 }
 
-                System.err.printf("%s라는 이름은 없습니다.\n", name);
+                System.err.printf("%s 이라는 이름은 없습니다.\n", name);
             }
         }
 
@@ -370,6 +347,13 @@ public class App {
         MovieTheater movieTheater = new MovieTheater(10, 10);
 
         exit: for (;;) {
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
             System.out.printf("1. 좌석 조회\n2. 좌석 예약\n3. 좌석 예약 취소\n4. 예약 정보 조회\n5. 종료\n원하는 작업을 선택하세요 (1/2/3/4/5): ");
             var selection = scanner.nextInt();
 
@@ -382,13 +366,14 @@ public class App {
 
                     Reservation reservation = new Reservation();
 
-                    System.out.print("예약하고 싶은 좌석의 번호/이름/전화번호 순으로 입력하주세요. (예: A2/홍길동/123-4567)");
+                    System.out.print("예약하고 싶은 좌석의 번호/이름/전화번호 순으로 입력하주세요. (예: A2/홍길동/123-4567)\n");
 
                     try {
                         var str=  scanner.next();
                         var splitted = str.split("/");
 
                         reservation.position = new SeatPosition(splitted[0]);
+
                         reservation.name = splitted[1];
                         reservation.phoneNumber = splitted[2];
 
@@ -460,6 +445,7 @@ public class App {
 
             public Tile Peek(Position current, Direction direction) {
 
+                return null;
             }
             
         }
