@@ -3,15 +3,22 @@
  */
 package univjavaprogramming;
 
+import java.awt.BorderLayout;
+import java.awt.Button;
+import java.awt.Container;
+import java.awt.GridLayout;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.TreeMap;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class App {
     
 
     public static void main(String[] args) {
-        Challenge3();
+        Challenge5();
         //Practice.week5();
     }
 
@@ -449,5 +456,50 @@ public class App {
             }
             
         }
+    }
+
+    public static void Challenge5(){
+        class SouthPanel extends JPanel{
+            public SouthPanel() {
+
+            }
+        }
+
+        class CenterPanel extends JPanel{
+            public CenterPanel() {
+                setLayout(new GridLayout(4,3, 5,5));
+
+
+
+                for (int i = 1; i <= 9; i++){
+                    add(new Button("${i}"));
+                }
+
+                add(new Button("+"));
+                add(new Button("-"));
+                add(new Button("*"));
+                add(new Button("/"));
+
+
+            }
+        }
+
+        class NorthPanel extends JPanel {
+            public NorthPanel(){
+
+            }
+        }
+
+        class MainFrame extends JFrame {
+            public MainFrame() {
+                Container contentPane = getContentPane();
+
+                contentPane.add(new SouthPanel(), BorderLayout.SOUTH);
+                contentPane.add(new NorthPanel(), BorderLayout.NORTH);
+                contentPane.add(new CenterPanel(), BorderLayout.CENTER);
+            }
+        }
+
+        new MainFrame();
     }
 }
