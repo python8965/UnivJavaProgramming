@@ -7,18 +7,22 @@ import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Container;
 import java.awt.GridLayout;
+import java.awt.Label;
+import java.awt.TextField;
 import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.TreeMap;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.text.GapContent;
 
 public class App {
     
 
     public static void main(String[] args) {
-        Challenge5();
+        Challenge4();
         //Practice.week5();
     }
 
@@ -73,18 +77,22 @@ public class App {
         }
     }
 
-    public static int randomRange(int start, int end){
-        return (int)(Math.random() * (end - start - 1)) + start;
-    }
+    
 
     public static void Challenge2(){
+        class Helper {
+            public static int randomRange(int start, int end){
+                return (int)(Math.random() * (end - start - 1)) + start;
+            }
+        }
+
         try (Scanner scanner = new Scanner(System.in)) { 
             var inputLottoNumber = new int[6];
             var lottoNumber = new int[6];
 
             for (int i = 0; i < inputLottoNumber.length; i++) {
                 check : for (;;){
-                    var num = randomRange(1, 45);
+                    var num = Helper.randomRange(1, 45);
 
                     if (num < 1 || num > 45){
                         continue;
@@ -420,14 +428,12 @@ public class App {
     }
 
     public static void Challenge4() {
-        class PacMan {
-
+        class Helper {
+            public static int randomRange(int start, int end){
+                return (int)(Math.random() * (end - start - 1)) + start;
+            }
         }
 
-        class Tile {
-
-        }
-        
         class Position {
             int x;
             int y;
@@ -438,6 +444,55 @@ public class App {
             }
         }
 
+        enum Tile {
+            PacMan, Empty, Cookie
+        }
+
+        class GameObject {
+            Position position;
+            public GameObject(Position position){
+                this.position = position;
+            }
+
+            public void register(Tile[][] tile){
+                tile[position.y][position.x] = getTileType();
+            }
+
+            protected Tile getTileType(){
+                return Tile.Empty;
+            }
+        }
+
+
+
+        class PacMan extends GameObject{
+            public PacMan(Position position) {
+                super(position);
+            }
+
+            @Override
+            protected Tile getTileType() {
+                return Tile.PacMan;
+            }
+        }
+
+        class Cookie  extends GameObject{
+
+            public Cookie(Position position) {
+                super(position);
+            }
+
+            @Override
+            protected Tile getTileType() {
+                return Tile.Cookie;
+            }
+        }
+
+
+        
+        
+        
+
         enum Direction {
             UP, DOWN,
             RIGHT, LEFT
@@ -446,22 +501,83 @@ public class App {
         class Map {
             Tile[][] mapData;
 
+            Cookie[] cookies;
+            PacMan pacMan;
+
             public Map(int width, int height) {
                 mapData = new Tile[height][width];
+
+                int cookieAmount = Helper.randomRange(2, 6);
+
+                cookies = new Cookie[cookieAmount];
+
+                pacMan = new PacMan(new Position(0, 0));
+                pacMan.register(mapData);
+
+
+                for (int i = 0; i < cookieAmount; i++){
+                    int x = 0;
+                    int y = 0;
+
+                    while (true) { 
+                        x = Helper.randomRange(0, width);
+                        y = Helper.randomRange(0, height);
+
+                        if (mapData[x][y] != Tile.Empty){
+                            break;
+                        }
+                    }
+
+                    cookies[i] = new Cookie(new Position(x, y));
+                    cookies[i].register(mapData);
+                }
+            }
+
+            public void PrintMap(){
+                for (var row : mapData) {
+                    for (var tile : row) {
+                        var c = '-';
+
+
+                        if (tile != null){
+                        switch (tile) {
+                            case PacMan:
+                                c = 'C';
+                                break;
+                            case Cookie:
+                                c = 'o';
+                                break;
+                            default:
+                                break;
+                        }}
+
+                        System.out.printf("%c", c);
+                    }
+
+                    System.out.println();
+                }
             }
 
             public Tile Peek(Position current, Direction direction) {
 
                 return null;
             }
-            
         }
+
+        var scanner = new Scanner(System.in);
+
+        var map = new Map(10, 10);
+
+        map.PrintMap();
+
+        scanner.next();
     }
 
     public static void Challenge5(){
         class SouthPanel extends JPanel{
             public SouthPanel() {
-
+                add(new Label("계산 결과"));
+                add(new TextField());
             }
         }
 
@@ -480,18 +596,21 @@ public class App {
                 add(new Button("*"));
                 add(new Button("/"));
 
-
+                add(new Button("계산"));
             }
         }
 
         class NorthPanel extends JPanel {
             public NorthPanel(){
-
+                add(new Label("현재 수식"));
+                add(new TextField());
             }
         }
 
         class MainFrame extends JFrame {
             public MainFrame() {
+                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
                 Container contentPane = getContentPane();
 
                 contentPane.add(new SouthPanel(), BorderLayout.SOUTH);
