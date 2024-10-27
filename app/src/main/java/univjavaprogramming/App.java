@@ -3,15 +3,13 @@
  */
 package univjavaprogramming;
 
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.TreeMap;
+import java.util.*;
 
 public class App {
     
 
     public static void main(String[] args) {
-        Challenge3();
+        Challenge4();
         //Practice.week5();
     }
 
@@ -413,41 +411,284 @@ public class App {
     }
 
     public static void Challenge4() {
-        class PacMan {
-
+        enum TileType {
+            Empty,
+            Cookie,
+            PacMan
         }
 
         class Tile {
+            final TileType type;
 
-        }
-        
-        class Position {
-            int x;
-            int y;
+            Tile(TileType type) {
+                this.type = type;
+            }
 
-            Position(int x, int y) {
-                this.x = x;
-                this.y = y;
+            public char ToIcon(){
+                return switch (type) {
+                    case Empty -> '-';
+                    case Cookie -> 'C';
+                    case PacMan -> 'P';
+                };
             }
         }
 
-        enum Direction {
-            UP, DOWN,
-            RIGHT, LEFT
+        interface IMap{
+            Tile[][] getMapData();
+
+            int getWidth();
+            int getHeight();
         }
 
-        class Map {
+        record Position (int x,int y){
+
+        }
+
+        abstract class GameObject{
+            protected Position position;
+
+            GameObject(Position position) {
+                this.position = position;
+            }
+
+            abstract TileType getTileType();
+
+            void Tick(){
+
+            }
+        }
+
+        abstract class MoveAble extends GameObject{
+            MoveAble(Position position) {
+                super(position);
+            }
+
+            abstract public void Move(int dx, int dy, IMap map);
+        }
+
+        class PacMan extends MoveAble{
+
+            PacMan(Position position) {
+                super(position);
+            }
+
+            @Override
+            TileType getTileType() {
+                return TileType.PacMan;
+            }
+
+            @Override
+            public void Move(int dx, int dy ,IMap map) {
+                final var width = map.getWidth();
+                final var height = map.getHeight();
+
+                var movedX = dx + position.x;
+                var movedY = dy + position.y;
+
+                if (movedX < 0 || movedX >= width || movedY < 0 || movedY >= height){
+                    return;
+                }
+
+                this.position = new Position(movedX, movedY);
+            }
+        }
+
+        class Cookie extends GameObject{
+            int count = 0;
+            Cookie(Position position) {
+                super(position);
+            }
+
+            @Override
+            TileType getTileType() {
+                return TileType.Cookie;
+            }
+
+            @Override
+            void Tick() {
+                super.Tick();
+
+                count += 1;
+
+                if (count == 3){
+                    var dx = randomRange(-1, 1);
+
+                    var dy = 0;
+                    if (dx == 0){
+                        dy = randomRange(-1, 1);
+                    }
+
+                    position = new Position(position.x + dx, position.y + dy);
+
+
+                    count = 0;
+                }
+            }
+        }
+
+        class Map implements IMap{
             Tile[][] mapData;
+
+            int width;
+            int height;
 
             public Map(int width, int height) {
                 mapData = new Tile[height][width];
+                this.width = width;
+                this.height = height;
             }
 
-            public Tile Peek(Position current, Direction direction) {
-
-                return null;
+            @Override
+            public Tile[][] getMapData() {
+                return mapData;
             }
-            
+
+            @Override
+            public int getWidth() {
+                return this.width;
+            }
+
+            @Override
+            public int getHeight() {
+                return this.height;
+            }
+
+            public void removeAt(int x, int y) {
+                mapData[y][x] = null;
+            }
+
+            public Tile getAt(int x, int y) {
+                var data= mapData[y][x];
+                if (data== null){
+                    return new Tile(TileType.Empty);
+                }
+
+                return data;
+            }
+
+            public void setAt(int x, int y, Tile tile) {
+                mapData[y][x] = tile;
+            }
         }
+
+        class Game{
+            Map map;
+            List<GameObject> Objects;
+
+            int cookieCount;
+
+            public Game(Map map){
+                this.map = map;
+                Objects = new ArrayList<>();
+
+                var pacMan = new PacMan(new Position(0,0));
+                this.map.setAt(0,0 , new Tile(TileType.PacMan));
+
+                Objects.add(pacMan);
+
+                List<Position> positions = new ArrayList<Position>();
+
+                this.cookieCount = randomRange(2, 5);
+
+                for (int i = 0; i < this.cookieCount; i++){
+                    var pos = new Position(randomRange(0, map.getWidth()),randomRange(0, map.getHeight()));
+
+                    while (positions.contains(pos)) {
+                        pos = new Position(randomRange(0, map.getWidth()), randomRange(0, map.getHeight()));
+                    }
+
+                    positions.add(pos);
+
+
+                    Objects.add(new Cookie(pos));
+                    this.map.setAt(pos.x, pos.y, new Tile(TileType.Cookie));
+                }
+            }
+
+            public void input(int dx, int dy) {
+                for (var object: Objects){
+                    if (object instanceof MoveAble){ //
+                        var preMovePosition = ((MoveAble) object).position;
+
+                        ((MoveAble) object).Move(dx, dy, map);
+
+                        var endMovePosition = ((MoveAble) object).position;
+
+
+
+                        if (!preMovePosition.equals(endMovePosition)){
+                            map.removeAt(preMovePosition.x, preMovePosition.y);
+                            map.setAt(endMovePosition.x, endMovePosition.y, new Tile(object.getTileType()));
+                        }
+                    }
+                }
+
+                for (var object: Objects){
+                    object.Tick();
+                }
+            }
+
+            public void print(){
+                var height = map.getHeight();
+                var width = map.getWidth();
+
+                for (int y = 0; y < height; y++){
+                    for (int x = 0; x < width; x++){
+                        System.out.printf("%c",map.getAt(x, y).ToIcon());
+
+                    }
+                    System.out.println();
+                }
+            }
+
+
+        }
+
+        Scanner scanner = new Scanner(System.in);
+
+        Map map = new Map(20, 20);
+
+        Game game = new Game(map);
+
+        game.print();
+
+        loop: while (game.cookieCount != 0){
+            var in= scanner.next();
+
+            int dx = 0;
+            int dy = 0;
+
+            switch (in){
+                case "w":
+                    dx = 0;
+                    dy = -1;
+                    break;
+                case "s":
+                    dx = 0;
+                    dy = 1;
+                    break;
+                case "a":
+                    dx = -1;
+                    dy = 0;
+                    break;
+                case "d":
+                    dx = 1;
+                    dy = 0;
+                    break;
+                default:
+                    break loop;
+            }
+
+            game.input(dx, dy);
+            game.print();
+
+
+        }
+
+
+    }
+
+    public static void Challenge6(){
+
     }
 }
