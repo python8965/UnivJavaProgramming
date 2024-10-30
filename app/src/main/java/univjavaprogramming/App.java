@@ -3,26 +3,28 @@
  */
 package univjavaprogramming;
 
-import java.awt.BorderLayout;
-import java.awt.Button;
-import java.awt.Container;
-import java.awt.GridLayout;
-import java.awt.Label;
-import java.awt.TextField;
-import java.util.Arrays;
-import java.util.Random;
-import java.util.Scanner;
-import java.util.TreeMap;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.text.GapContent;
+
+import javax.swing.*;
+import javax.swing.event.*;
+import javax.swing.plaf.basic.BasicButtonListener;
+import javax.swing.text.Document;
+
+import java.awt.*;
+import java.awt.event.*;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.Stack;
+import java.util.TreeMap;
+import java.util.List;
 
 public class App {
     
 
     public static void main(String[] args) {
-        Challenge4();
+        Challenge6();
         //Practice.week5();
     }
 
@@ -576,8 +578,10 @@ public class App {
     public static void Challenge5(){
         class SouthPanel extends JPanel{
             public SouthPanel() {
-                add(new Label("계산 결과"));
-                add(new TextField());
+                add(new JLabel("계산 결과")).setForeground(Color.WHITE);;
+                add(new JTextField());
+
+                setBackground(Color.DARK_GRAY);
             }
         }
 
@@ -587,23 +591,28 @@ public class App {
 
 
 
-                for (int i = 1; i <= 9; i++){
-                    add(new Button("${i}"));
+                for (int i = 0; i <= 9; i++){
+                    add(new JButton("" + i));
                 }
 
-                add(new Button("+"));
-                add(new Button("-"));
-                add(new Button("*"));
-                add(new Button("/"));
+                add(new JButton("CE"));
+                add(new JButton("계산"));
 
-                add(new Button("계산"));
+                add(new JButton("+")).setBackground(Color.YELLOW);;
+                add(new JButton("-")).setBackground(Color.YELLOW);;
+                add(new JButton("*")).setBackground(Color.YELLOW);;
+                add(new JButton("/")).setBackground(Color.YELLOW);;
+
+                
             }
         }
 
         class NorthPanel extends JPanel {
             public NorthPanel(){
-                add(new Label("현재 수식"));
+                add(new JLabel("현재 수식"));
                 add(new TextField());
+                setBackground(Color.GRAY);
+                
             }
         }
 
@@ -616,6 +625,244 @@ public class App {
                 contentPane.add(new SouthPanel(), BorderLayout.SOUTH);
                 contentPane.add(new NorthPanel(), BorderLayout.NORTH);
                 contentPane.add(new CenterPanel(), BorderLayout.CENTER);
+
+                setSize(300, 300);
+
+                setVisible(true);
+            }
+        }
+
+        new MainFrame();
+    }
+
+
+    public static void Challenge6(){
+        class SouthPanel extends JPanel{
+            JTextField resultDocument;
+
+            public SouthPanel() {
+
+
+                add(new JLabel("계산 결과")).setForeground(Color.WHITE);
+                
+                
+                var c = new JTextField();
+                c.setColumns(15);
+                c.setFocusable(false);
+                resultDocument = c;
+                add(c);
+
+                setBackground(Color.DARK_GRAY);
+            }
+        }
+
+        class CenterPanel extends JPanel{
+            JTextField resultField;
+            JTextField inputField;
+
+            public CenterPanel() {
+                setLayout(new GridLayout(4,3, 5,5));
+
+
+
+                for (int i = 0; i <= 9; i++){
+                    var btn = new JButton("" + i);
+
+                    btn.addActionListener(
+                        new ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                                JButton b = (JButton)e.getSource();
+
+                                int i = Integer.parseInt(b.getText());
+                                inputField.setText(inputField.getText() + i);
+                            }
+                        }
+                    );
+
+                    add(btn);
+                }
+
+                var cebutton = new JButton("CE");
+
+                cebutton.addActionListener(
+                    new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                            inputField.setText("");
+                        }
+                    }
+                );
+
+                add(cebutton);
+                
+                var calcbutton=new JButton("계산");
+
+                
+
+                calcbutton.addActionListener(
+                    new ActionListener() {
+                        int getOrder(char c) {
+                            switch (c) {
+                                case '+':
+                                case '-':
+                                    return 0;
+                                case '*':
+                                case '/':
+                                    return 1;
+                                default:
+                                    return -1;
+                            }
+                        }
+
+                        boolean isDigit(char c){
+                            return getOrder(c) == -1;
+                        }
+
+                        public void actionPerformed(ActionEvent e) {
+                            
+                            //후위 표기법 파트
+
+                            var text = inputField.getText();
+                            var stack = new Stack<Character>();
+
+
+                            List<Character> postfixText = new ArrayList<Character>();
+
+                            for (var c : text.toCharArray()){
+
+                                if (!isDigit(c)){
+                                    if (stack.size() != 0){
+
+                                        var token = stack.peek();
+
+                                        if (getOrder(c) <= getOrder(token)){
+                                            postfixText.add(stack.pop());
+                                            stack.add(c);
+                                            continue;
+                                        }
+                                    }
+
+                                    stack.add(c);
+                                }
+                                else {
+                                    postfixText.add(c);
+                                }
+                            }
+
+                            while (stack.size() != 0){
+                                postfixText.add(stack.pop());
+                            }
+
+                            System.out.println(postfixText.toString());
+
+                            // 계산 파트
+                            Stack<Integer> istack = new Stack<>();
+
+                            try{
+
+                                for (var c: postfixText){
+                                    if (isDigit(c)) {
+                                        
+                                        int i =Integer.parseInt(Character.toString(c));
+
+
+                                        istack.push(i);
+                                    } else {
+                                        int op2 = istack.pop();
+                                        int op1 = istack.pop();
+
+                                        switch (c) {
+                                            case '+':
+                                                istack.push(op1 + op2);
+                                                break;
+                                            case '-':
+                                                istack.push(op1 - op2);
+                                                break;
+                                            case '/':
+                                                istack.push(op1 / op2);
+                                                break;
+                                            case '*':
+                                                istack.push(op1 * op2);
+                                                break;
+                                        }
+                                    }
+                                }
+
+                                if (istack.size() != 1){
+                                    System.out.println(istack.toString());
+                                    throw new Exception();
+                                }
+
+                                resultField.setText(istack.pop().toString());
+                            }catch (Exception error){
+                                resultField.setText("에러: " + error.getMessage());
+                            }
+                        }
+                    }
+                );
+                
+                add(calcbutton);
+
+
+
+                String[] s = {"+", "-", "*", "/"};
+
+                for (var token : s){
+                    var btn = new JButton(token);
+                    btn.addActionListener(
+                        new ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                                JButton b = (JButton)e.getSource();
+
+                                String i = b.getText();
+                                inputField.setText(inputField.getText() + i);
+                            }
+                        }
+                    );
+                    btn.setBackground(Color.YELLOW);
+
+                    add(btn);
+                }
+                
+            }
+        }
+
+        class NorthPanel extends JPanel {
+            JTextField inputField;
+
+            public NorthPanel(){
+                add(new JLabel("현재 수식"));
+                
+                var c= new JTextField();
+                add(c);
+                c.setColumns(15);
+                inputField = c;
+                setBackground(Color.GRAY);
+                
+            }
+        }
+
+        class MainFrame extends JFrame {
+            public MainFrame() {
+                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+                Container contentPane = getContentPane();
+
+                var southPanel = new SouthPanel();
+
+                var northPanel = new NorthPanel();
+
+                contentPane.add(southPanel, BorderLayout.SOUTH);
+                
+                contentPane.add(northPanel, BorderLayout.NORTH);
+
+                var centerPanel = new CenterPanel();
+                centerPanel.resultField = southPanel.resultDocument;
+                centerPanel.inputField = northPanel.inputField;
+                contentPane.add(centerPanel, BorderLayout.CENTER);
+
+                setSize(300, 300);
+
+                setVisible(true);
             }
         }
 
