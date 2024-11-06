@@ -879,15 +879,29 @@ public class App {
         class MainFrame extends JFrame {
             class TitlePanel extends JPanel {
                 public TitlePanel() {
-    
+                    var label = new JLabel("Lorem Picsum");
+                    label.setForeground(Color.MAGENTA);
+                    add(label);
                 }
             }
 
             class MainPanel extends JPanel {
                 public ImageIcon Icon;
+                int imageHeight = 200;
+                int imageWidth = 200;
 
                 public void paintComponent(Graphics g){
+                    for (int i = 0; i < 4; i++){
+                        for (int j = 0; j < 4; j++){
+                            g.drawImage(Icon.getImage(), i * (imageWidth + 10), j * (imageHeight + 10), this);
+                        }
+                    }
 
+                    var c = g.getClipBounds();
+
+                    g.drawString("20231975 박성준", c.width, c.height);
+
+                    
                 }
             }
 
@@ -898,7 +912,7 @@ public class App {
                     URL url = new URL("https://picsum.photos/200");
                     image = ImageIO.read(url);
                 } catch (Exception e){
-                    
+                    //exit
                 }
 
 
