@@ -5,6 +5,7 @@ package univjavaprogramming;
 
 
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.plaf.basic.BasicButtonListener;
@@ -12,7 +13,8 @@ import javax.swing.text.Document;
 
 import java.awt.*;
 import java.awt.event.*;
-
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -20,11 +22,13 @@ import java.util.Stack;
 import java.util.TreeMap;
 import java.util.List;
 
+import java.net.*;
+
 public class App {
     
 
     public static void main(String[] args) {
-        Challenge6();
+        Challenge7();
         //Practice.week5();
     }
 
@@ -864,6 +868,59 @@ public class App {
 
                 setVisible(true);
             }
+        }
+
+        new MainFrame();
+    }
+
+    public static void Challenge7(){
+        
+
+        class MainFrame extends JFrame {
+            class TitlePanel extends JPanel {
+                public TitlePanel() {
+    
+                }
+            }
+
+            class MainPanel extends JPanel {
+                public ImageIcon Icon;
+
+                public void paintComponent(Graphics g){
+
+                }
+            }
+
+            public MainFrame(){
+                Image image = null;
+
+                try {
+                    URL url = new URL("https://picsum.photos/200");
+                    image = ImageIO.read(url);
+                } catch (Exception e){
+                    
+                }
+
+
+                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+                Container contentPane = getContentPane();
+
+                var titlePanel = new TitlePanel();
+                var mainPanel = new MainPanel();
+
+                mainPanel.Icon.setImage(image);
+
+                contentPane.add(titlePanel, BorderLayout.SOUTH);
+
+                setSize(300, 300);
+
+                setVisible(true);
+            }
+
+            
+
+            
         }
 
         new MainFrame();
