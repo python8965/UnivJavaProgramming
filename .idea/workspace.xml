@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="134878bf-6473-44cd-bf08-69eb5244b30b" name="변경" comment="팩맨-쿠키 충돌&#10;쿠키-쿠키 충돌&#10;정도만 개발하면 될듯">
+      <change afterPath="$PROJECT_DIR$/app/.project" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/.settings/org.eclipse.buildship.core.prefs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/.settings/org.eclipse.jdt.core.prefs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$1CenterPanel.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$1Cookie.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$1Direction.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$1GameObject.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$1Helper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$1MainFrame.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$1Map.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$1MovieTheater.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$1NorthPanel.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$1PacMan.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$1Position.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$1Reservation.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$1SeatPosition.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$1SouthPanel.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$1Tile.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$2CenterPanel$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$2CenterPanel$2.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$2CenterPanel$3.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$2CenterPanel$4.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$2CenterPanel.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$2Helper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$2MainFrame.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$2NorthPanel.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$2SouthPanel.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$3MainFrame$MainPanel.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$3MainFrame$TitlePanel.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$3MainFrame.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/Practice$1Audio.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/Practice$1Buyer.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/Practice$1Computer.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/Practice$1Mytv.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/Practice$1Product.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/Practice$1SmartTv.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/Practice.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/20231975report.hwp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/univjavaprogramming/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/univjavaprogramming/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/test/java/univjavaprogramming/AppTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="UnivJavaProgramming" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;python8965&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/python8965/UnivJavaProgramming.git&quot;,
+    &quot;accountId&quot;: &quot;87672f8b-36d9-4a1f-9edf-6c09e2bf2cc5&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2n6nu9EKKNBzI1wmWqHuIufD4G0" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Gradle.UnivJavaProgramming:app [:app:univjavaprogramming.App.main()].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "android.gradle.sync.needed": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "main 병합 중",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "프로젝트",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "show.migrate.to.gradle.popup": "false",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="디폴트 작업">
+      <changelist id="134878bf-6473-44cd-bf08-69eb5244b30b" name="변경" comment="" />
+      <created>1728302612524</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1728302612524</updated>
+      <workItem from="1728302613570" duration="894000" />
+      <workItem from="1728383466012" duration="4557000" />
+      <workItem from="1728458339358" duration="830000" />
+      <workItem from="1728722486269" duration="728000" />
+      <workItem from="1728723232821" duration="3731000" />
+      <workItem from="1728806067187" duration="5034000" />
+      <workItem from="1728899289710" duration="167000" />
+      <workItem from="1730010016872" duration="6446000" />
+      <workItem from="1730886769481" duration="294000" />
+      <workItem from="1730887072660" duration="96000" />
+    </task>
+    <task id="LOCAL-00001" summary="idea">
+      <option name="closed" value="true" />
+      <created>1728302736014</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1728302736014</updated>
+    </task>
+    <task id="LOCAL-00002" summary="idea">
+      <option name="closed" value="true" />
+      <created>1728302837417</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1728302837417</updated>
+    </task>
+    <task id="LOCAL-00003" summary="살짝">
+      <option name="closed" value="true" />
+      <created>1728384858827</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1728384858827</updated>
+    </task>
+    <task id="LOCAL-00004" summary="좌석예약픅로그램 완성">
+      <option name="closed" value="true" />
+      <created>1728815242166</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1728815242166</updated>
+    </task>
+    <task id="LOCAL-00005" summary="팩맨-쿠키 충돌&#10;쿠키-쿠키 충돌&#10;정도만 개발하면 될듯">
+      <option name="closed" value="true" />
+      <created>1730018330304</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1730018330304</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="idea" />
+    <MESSAGE value="살짝" />
+    <MESSAGE value="좌석예약픅로그램 완성" />
+    <MESSAGE value="팩맨-쿠키 충돌&#10;쿠키-쿠키 충돌&#10;정도만 개발하면 될듯" />
+    <option name="LAST_COMMIT_MESSAGE" value="팩맨-쿠키 충돌&#10;쿠키-쿠키 충돌&#10;정도만 개발하면 될듯" />
+  </component>
+</project>

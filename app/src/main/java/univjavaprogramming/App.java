@@ -3,13 +3,33 @@
  */
 package univjavaprogramming;
 
+
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.event.*;
+import javax.swing.plaf.basic.BasicButtonListener;
+import javax.swing.text.Document;
+
+import java.awt.*;
+import java.awt.event.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.Stack;
+import java.util.TreeMap;
+import java.util.List;
+
+import java.net.*;
 import java.util.*;
 
 public class App {
     
 
     public static void main(String[] args) {
-        Challenge4();
+        Challenge7();
         //Practice.week5();
     }
 
@@ -64,18 +84,22 @@ public class App {
         }
     }
 
-    public static int randomRange(int start, int end){
-        return (int)(Math.random() * (end - start - 1)) + start;
+    class Helper {
+        public static int randomRange(int start, int end){
+            return (int)(Math.random() * (end - start - 1)) + start;
+        }
     }
 
     public static void Challenge2(){
+
+
         try (Scanner scanner = new Scanner(System.in)) { 
             var inputLottoNumber = new int[6];
             var lottoNumber = new int[6];
 
             for (int i = 0; i < inputLottoNumber.length; i++) {
                 check : for (;;){
-                    var num = randomRange(1, 45);
+                    var num = Helper.randomRange(1, 45);
 
                     if (num < 1 || num > 45){
                         continue;
@@ -511,11 +535,11 @@ public class App {
                 count += 1;
 
                 if (count == 3){
-                    var dx = randomRange(-1, 1);
+                    var dx = Helper.randomRange(-1, 1);
 
                     var dy = 0;
                     if (dx == 0){
-                        dy = randomRange(-1, 1);
+                        dy = Helper.randomRange(-1, 1);
                     }
 
                     position = new Position(position.x + dx, position.y + dy);
@@ -588,13 +612,13 @@ public class App {
 
                 List<Position> positions = new ArrayList<Position>();
 
-                this.cookieCount = randomRange(2, 5);
+                this.cookieCount = Helper.randomRange(2, 5);
 
                 for (int i = 0; i < this.cookieCount; i++){
-                    var pos = new Position(randomRange(0, map.getWidth()),randomRange(0, map.getHeight()));
+                    var pos = new Position(Helper.randomRange(0, map.getWidth()),Helper.randomRange(0, map.getHeight()));
 
                     while (positions.contains(pos)) {
-                        pos = new Position(randomRange(0, map.getWidth()), randomRange(0, map.getHeight()));
+                        pos = new Position(Helper.randomRange(0, map.getWidth()), Helper.randomRange(0, map.getHeight()));
                     }
 
                     positions.add(pos);
@@ -688,7 +712,364 @@ public class App {
 
     }
 
-    public static void Challenge6(){
+    public static void Challenge5(){
+        class SouthPanel extends JPanel{
+            public SouthPanel() {
+                add(new JLabel("계산 결과")).setForeground(Color.WHITE);;
+                add(new JTextField());
 
+                setBackground(Color.DARK_GRAY);
+            }
+        }
+
+        class CenterPanel extends JPanel{
+            public CenterPanel() {
+                setLayout(new GridLayout(4,3, 5,5));
+
+
+
+                for (int i = 0; i <= 9; i++){
+                    add(new JButton("" + i));
+                }
+
+                add(new JButton("CE"));
+                add(new JButton("계산"));
+
+                add(new JButton("+")).setBackground(Color.YELLOW);;
+                add(new JButton("-")).setBackground(Color.YELLOW);;
+                add(new JButton("*")).setBackground(Color.YELLOW);;
+                add(new JButton("/")).setBackground(Color.YELLOW);;
+
+
+            }
+        }
+
+        class NorthPanel extends JPanel {
+            public NorthPanel(){
+                add(new JLabel("현재 수식"));
+                add(new TextField());
+                setBackground(Color.GRAY);
+
+            }
+        }
+
+        class MainFrame extends JFrame {
+            public MainFrame() {
+                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+                Container contentPane = getContentPane();
+
+                contentPane.add(new SouthPanel(), BorderLayout.SOUTH);
+                contentPane.add(new NorthPanel(), BorderLayout.NORTH);
+                contentPane.add(new CenterPanel(), BorderLayout.CENTER);
+
+                setSize(300, 300);
+
+                setVisible(true);
+            }
+        }
+
+        new MainFrame();
+    }
+
+
+    public static void Challenge6(){
+        class SouthPanel extends JPanel{
+            JTextField resultDocument;
+
+            public SouthPanel() {
+
+
+                add(new JLabel("계산 결과")).setForeground(Color.WHITE);
+
+
+                var c = new JTextField();
+                c.setColumns(15);
+                c.setFocusable(false);
+                resultDocument = c;
+                add(c);
+
+                setBackground(Color.DARK_GRAY);
+            }
+        }
+
+        class CenterPanel extends JPanel{
+            JTextField resultField;
+            JTextField inputField;
+
+            public CenterPanel() {
+                setLayout(new GridLayout(4,3, 5,5));
+
+
+
+                for (int i = 0; i <= 9; i++){
+                    var btn = new JButton("" + i);
+
+                    btn.addActionListener(
+                            new ActionListener() {
+                                public void actionPerformed(ActionEvent e) {
+                                    JButton b = (JButton)e.getSource();
+
+                                    int i = Integer.parseInt(b.getText());
+                                    inputField.setText(inputField.getText() + i);
+                                }
+                            }
+                    );
+
+                    add(btn);
+                }
+
+                var cebutton = new JButton("CE");
+
+                cebutton.addActionListener(
+                        new ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                                inputField.setText("");
+                            }
+                        }
+                );
+
+                add(cebutton);
+
+                var calcbutton=new JButton("계산");
+
+
+
+                calcbutton.addActionListener(
+                        new ActionListener() {
+                            int getOrder(char c) {
+                                switch (c) {
+                                    case '+':
+                                    case '-':
+                                        return 0;
+                                    case '*':
+                                    case '/':
+                                        return 1;
+                                    default:
+                                        return -1;
+                                }
+                            }
+
+                            boolean isDigit(char c){
+                                return getOrder(c) == -1;
+                            }
+
+                            public void actionPerformed(ActionEvent e) {
+
+                                //후위 표기법 파트
+
+                                var text = inputField.getText();
+                                var stack = new Stack<Character>();
+
+
+                                List<Character> postfixText = new ArrayList<Character>();
+
+                                for (var c : text.toCharArray()){
+
+                                    if (!isDigit(c)){
+                                        if (stack.size() != 0){
+
+                                            var token = stack.peek();
+
+                                            if (getOrder(c) <= getOrder(token)){
+                                                postfixText.add(stack.pop());
+                                                stack.add(c);
+                                                continue;
+                                            }
+                                        }
+
+                                        stack.add(c);
+                                    }
+                                    else {
+                                        postfixText.add(c);
+                                    }
+                                }
+
+                                while (stack.size() != 0){
+                                    postfixText.add(stack.pop());
+                                }
+
+                                System.out.println(postfixText.toString());
+
+                                // 계산 파트
+                                Stack<Integer> istack = new Stack<>();
+
+                                try{
+
+                                    for (var c: postfixText){
+                                        if (isDigit(c)) {
+
+                                            int i =Integer.parseInt(Character.toString(c));
+
+
+                                            istack.push(i);
+                                        } else {
+                                            int op2 = istack.pop();
+                                            int op1 = istack.pop();
+
+                                            switch (c) {
+                                                case '+':
+                                                    istack.push(op1 + op2);
+                                                    break;
+                                                case '-':
+                                                    istack.push(op1 - op2);
+                                                    break;
+                                                case '/':
+                                                    istack.push(op1 / op2);
+                                                    break;
+                                                case '*':
+                                                    istack.push(op1 * op2);
+                                                    break;
+                                            }
+                                        }
+                                    }
+
+                                    if (istack.size() != 1){
+                                        System.out.println(istack.toString());
+                                        throw new Exception();
+                                    }
+
+                                    resultField.setText(istack.pop().toString());
+                                }catch (Exception error){
+                                    resultField.setText("에러: " + error.getMessage());
+                                }
+                            }
+                        }
+                );
+
+                add(calcbutton);
+
+
+
+                String[] s = {"+", "-", "*", "/"};
+
+                for (var token : s){
+                    var btn = new JButton(token);
+                    btn.addActionListener(
+                            new ActionListener() {
+                                public void actionPerformed(ActionEvent e) {
+                                    JButton b = (JButton)e.getSource();
+
+                                    String i = b.getText();
+                                    inputField.setText(inputField.getText() + i);
+                                }
+                            }
+                    );
+                    btn.setBackground(Color.YELLOW);
+
+                    add(btn);
+                }
+
+            }
+        }
+
+        class NorthPanel extends JPanel {
+            JTextField inputField;
+
+            public NorthPanel(){
+                add(new JLabel("현재 수식"));
+
+                var c= new JTextField();
+                add(c);
+                c.setColumns(15);
+                inputField = c;
+                setBackground(Color.GRAY);
+
+            }
+        }
+
+        class MainFrame extends JFrame {
+            public MainFrame() {
+                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+                Container contentPane = getContentPane();
+
+                var southPanel = new SouthPanel();
+
+                var northPanel = new NorthPanel();
+
+                contentPane.add(southPanel, BorderLayout.SOUTH);
+
+                contentPane.add(northPanel, BorderLayout.NORTH);
+
+                var centerPanel = new CenterPanel();
+                centerPanel.resultField = southPanel.resultDocument;
+                centerPanel.inputField = northPanel.inputField;
+                contentPane.add(centerPanel, BorderLayout.CENTER);
+
+                setSize(300, 300);
+
+                setVisible(true);
+            }
+        }
+
+        new MainFrame();
+    }
+
+    public static void Challenge7(){
+
+
+        class MainFrame extends JFrame {
+            class TitlePanel extends JPanel {
+                public TitlePanel() {
+                    var label = new JLabel("Lorem Picsum");
+                    label.setForeground(Color.MAGENTA);
+                    add(label);
+                }
+            }
+
+            class MainPanel extends JPanel {
+                public ImageIcon Icon;
+                int imageHeight = 200;
+                int imageWidth = 200;
+
+                public void paintComponent(Graphics g){
+                    for (int i = 0; i < 4; i++){
+                        for (int j = 0; j < 4; j++){
+                            g.drawImage(Icon.getImage(), i * (imageWidth + 10), j * (imageHeight + 10), this);
+                        }
+                    }
+
+                    var c = g.getClipBounds();
+
+                    g.drawString("20231975 박성준", c.width, c.height);
+
+
+                }
+            }
+
+            public MainFrame(){
+                Image image = null;
+
+                try {
+                    URL url = new URL("https://picsum.photos/200");
+                    image = ImageIO.read(url);
+                } catch (Exception e){
+                    //exit
+                }
+
+
+                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+                Container contentPane = getContentPane();
+
+                var titlePanel = new TitlePanel();
+                var mainPanel = new MainPanel();
+
+                mainPanel.Icon.setImage(image);
+
+                contentPane.add(titlePanel, BorderLayout.SOUTH);
+
+                setSize(300, 300);
+
+                setVisible(true);
+            }
+
+
+
+
+        }
+
+        new MainFrame();
     }
 }
