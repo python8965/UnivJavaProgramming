@@ -14,6 +14,8 @@ import javax.swing.text.Document;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -1019,33 +1021,42 @@ public class App {
             }
 
             class MainPanel extends JPanel {
-                public ImageIcon Icon;
+                public Image image;
                 int imageHeight = 200;
                 int imageWidth = 200;
 
                 public void paintComponent(Graphics g){
                     for (int i = 0; i < 4; i++){
                         for (int j = 0; j < 4; j++){
-                            g.drawImage(Icon.getImage(), i * (imageWidth + 10), j * (imageHeight + 10), this);
+                            g.drawImage(image, i * (imageWidth + 10), j * (imageHeight + 10), this);
                         }
                     }
 
                     var c = g.getClipBounds();
 
-                    g.drawString("20231975 박성준", c.width, c.height);
+
+
+                    g.drawString("20231975 박성준", c.width /2, c.height/2);
 
 
                 }
             }
 
             public MainFrame(){
-                Image image = null;
+                var mainPanel = new MainPanel();
 
                 try {
                     URL url = new URL("https://picsum.photos/200");
-                    image = ImageIO.read(url);
+
+                    Image image = ImageIO.read(url);
+
+                    System.out.print(image.toString());
+
+                    mainPanel.image = image;
                 } catch (Exception e){
                     //exit
+                    System.out.println(e.getMessage());
+
                 }
 
 
@@ -1054,9 +1065,10 @@ public class App {
                 Container contentPane = getContentPane();
 
                 var titlePanel = new TitlePanel();
-                var mainPanel = new MainPanel();
 
-                mainPanel.Icon.setImage(image);
+
+
+                contentPane.add(mainPanel, BorderLayout.CENTER);
 
                 contentPane.add(titlePanel, BorderLayout.SOUTH);
 

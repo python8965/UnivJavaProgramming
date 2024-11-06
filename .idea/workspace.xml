@@ -4,60 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="134878bf-6473-44cd-bf08-69eb5244b30b" name="변경" comment="팩맨-쿠키 충돌&#10;쿠키-쿠키 충돌&#10;정도만 개발하면 될듯">
-      <change afterPath="$PROJECT_DIR$/app/.project" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/.settings/org.eclipse.buildship.core.prefs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/.settings/org.eclipse.jdt.core.prefs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$1CenterPanel.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$1Cookie.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$1Direction.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$1GameObject.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$1Helper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$1MainFrame.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$1Map.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$1MovieTheater.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$1NorthPanel.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$1PacMan.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$1Position.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$1Reservation.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$1SeatPosition.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$1SouthPanel.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$1Tile.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$2CenterPanel$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$2CenterPanel$2.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$2CenterPanel$3.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$2CenterPanel$4.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$2CenterPanel.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$2Helper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$2MainFrame.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$2NorthPanel.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$2SouthPanel.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$3MainFrame$MainPanel.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$3MainFrame$TitlePanel.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App$3MainFrame.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/App.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/Practice$1Audio.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/Practice$1Buyer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/Practice$1Computer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/Practice$1Mytv.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/Practice$1Product.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/Practice$1SmartTv.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/bin/main/univjavaprogramming/Practice.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/20231975report.hwp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+    <list default="true" id="134878bf-6473-44cd-bf08-69eb5244b30b" name="변경" comment="local">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/.project" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/univjavaprogramming/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/univjavaprogramming/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/test/java/univjavaprogramming/AppTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,12 +63,12 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Gradle.UnivJavaProgramming:app [:app:univjavaprogramming.App.main()].executor": "Run",
+    "Gradle.UnivJavaProgramming.executor": "Debug",
+    "Gradle.UnivJavaProgramming:app [:app:univjavaprogramming.App.main()].executor": "Debug",
+    "HTTP 요청.generated-requests | #1.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "android.gradle.sync.needed": "true",
     "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "main 병합 중",
+    "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
@@ -134,6 +84,9 @@
   }
 }]]></component>
   <component name="RunManager">
+    <configuration name="generated-requests | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" requestIdentifier="#1" runType="단일 요청 실행">
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <method v="2">
         <option name="Make" enabled="true" />
@@ -145,6 +98,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="HTTP 요청.generated-requests | #1" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -171,7 +129,7 @@
       <workItem from="1728899289710" duration="167000" />
       <workItem from="1730010016872" duration="6446000" />
       <workItem from="1730886769481" duration="294000" />
-      <workItem from="1730887072660" duration="96000" />
+      <workItem from="1730887072660" duration="5177000" />
     </task>
     <task id="LOCAL-00001" summary="idea">
       <option name="closed" value="true" />
@@ -213,17 +171,87 @@
       <option name="project" value="LOCAL" />
       <updated>1730018330304</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="local">
+      <option name="closed" value="true" />
+      <created>1730887296552</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1730887296552</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="idea" />
     <MESSAGE value="살짝" />
     <MESSAGE value="좌석예약픅로그램 완성" />
     <MESSAGE value="팩맨-쿠키 충돌&#10;쿠키-쿠키 충돌&#10;정도만 개발하면 될듯" />
-    <option name="LAST_COMMIT_MESSAGE" value="팩맨-쿠키 충돌&#10;쿠키-쿠키 충돌&#10;정도만 개발하면 될듯" />
+    <MESSAGE value="local" />
+    <option name="LAST_COMMIT_MESSAGE" value="local" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.jdks/corretto-17.0.13/lib/src.zip!/java.desktop/javax/imageio/ImageIO.java</url>
+          <line>1400</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/univjavaprogramming/App.java</url>
+          <line>1048</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.jdks/corretto-17.0.13/lib/src.zip!/java.desktop/javax/imageio/ImageIO.java</url>
+          <line>1401</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.jdks/corretto-17.0.13/lib/src.zip!/java.desktop/javax/imageio/ImageIO.java</url>
+          <line>1402</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.jdks/corretto-17.0.13/lib/src.zip!/java.desktop/javax/imageio/ImageIO.java</url>
+          <line>1405</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.jdks/corretto-17.0.13/lib/src.zip!/java.desktop/javax/imageio/ImageIO.java</url>
+          <line>1404</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>jar://$USER_HOME$/.jdks/corretto-17.0.13/lib/src.zip!/java.desktop/javax/imageio/ImageIO.java</url>
+          <line>1399</line>
+          <properties class="javax.imageio.ImageIO" method="read">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="GradleRunConfiguration">
+        <watch expression="image" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>
