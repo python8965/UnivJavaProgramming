@@ -31,7 +31,7 @@ public class App {
     
 
     public static void main(String[] args) {
-        Challenge7();
+        Challenge8();
         //Practice.week5();
     }
 
@@ -1080,6 +1080,95 @@ public class App {
 
 
 
+        }
+
+        new MainFrame();
+    }
+
+    public static void Challenge8() {
+        class MainFrame extends JFrame {
+            private JLabel resultLabel = new JLabel("계산 결과 출력");
+
+            public MainFrame(){
+                super("다이얼로그 만들기");
+                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                Container c = getContentPane();
+
+                c.setLayout(new FlowLayout());
+                JButton btn  = new JButton("calculate");
+                btn.addActionListener(new MyActionListener());
+                c.add(btn);
+
+                resultLabel.setOpaque(true);
+                resultLabel.setBackground(Color.WHITE);
+                c.add(resultLabel);
+
+                setSize(250,200);
+                setVisible(true);
+            }
+
+            public void SetResultLabel(String string) {
+                resultLabel.setText(string);
+            }
+
+            class MyActionListener implements ActionListener{
+                private CalcDialog dialog;
+                public MyActionListener() {
+                    dialog = new CalcDialog(MainFrame.this);
+                    dialog.addWindowListener(new WindowAdapter() {
+                        @Override
+                        public void windowDeactivated(WindowEvent e) {
+                            int number = ((CalcDialog)e.getSource()).getResult();
+                            MainFrame.this.resultLabel.setText(Integer.toString(number));
+                        }
+                        
+                    });
+                }
+
+                public void actionPerformed(ActionEvent e){
+                    dialog.setVisible(true);
+                }
+            }
+
+            class CalcDialog extends JDialog{
+                private int sum=0;
+                private JTextField a = new JTextField(10);
+                private JTextField b = new JTextField(10);
+                private JButton mulBtn = new JButton("   Multiply   ");
+
+                public CalcDialog(JFrame owner){
+                    super(owner,"Calculation Dialog", true);
+                    setLayout(new FlowLayout());
+
+                    add (new JLabel("두 수를 곱합니다."));
+                    add(a);
+                    add(b);
+
+                    mulBtn.addActionListener(new ActionListener() {
+
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            try{
+                                sum = Integer.parseInt( a.getText()) * Integer.parseInt(b.getText());
+                                setVisible(false);
+                            } catch (NumberFormatException ee) {
+                                sum = 0;
+                                System.err.println("please Enter number");
+                            } 
+                        }
+                        
+                    });
+
+                    
+
+                    add(mulBtn);
+                    setSize(350, 400);
+                }
+
+                public int getResult() {
+                    return sum;
+                }
+            }
         }
 
         new MainFrame();
