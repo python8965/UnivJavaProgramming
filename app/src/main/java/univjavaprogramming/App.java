@@ -8,15 +8,9 @@ package univjavaprogramming;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.*;
-import javax.swing.plaf.basic.BasicButtonListener;
-import javax.swing.text.Document;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -31,11 +25,12 @@ public class App {
     
 
     public static void main(String[] args) {
-        Challenge8();
+        //TODO: 4주차부터는 설계랑 추가 사항 X 채울 것
+        Challenge4();
         //Practice.week5();
     }
 
-    public static void Challenge1(){
+    public static void Challenge1(){ //2주차
         int hour, minute;
 
         int currentMinute;
@@ -92,7 +87,7 @@ public class App {
         }
     }
 
-    public static void Challenge2(){
+    public static void Challenge2(){ //3주차
 
 
         try (Scanner scanner = new Scanner(System.in)) { 
@@ -187,7 +182,7 @@ public class App {
         return (char)(toChar + 65);
     }
 
-    public static void Challenge3(){
+    public static void Challenge3(){ // 4주차
 
         class  SeatPosition implements Comparable<SeatPosition> {
             int row;
@@ -436,7 +431,7 @@ public class App {
 
     }
 
-    public static void Challenge4() {
+    public static void Challenge4() { // 5주차 TODO: 3걸음마다 Cookie 움직이게, 점수 표지 &클리어, wasd 외에 입력했을때 프로그램 끝나지 않게 하기.
         enum TileType {
             Empty,
             Cookie,
@@ -714,7 +709,7 @@ public class App {
 
     }
 
-    public static void Challenge5(){
+    public static void Challenge5(){ // 7주차
         class SouthPanel extends JPanel{
             public SouthPanel() {
                 add(new JLabel("계산 결과")).setForeground(Color.WHITE);;
@@ -775,7 +770,7 @@ public class App {
     }
 
 
-    public static void Challenge6(){
+    public static void Challenge6(){//9주차
         class SouthPanel extends JPanel{
             JTextField resultDocument;
 
@@ -1008,7 +1003,7 @@ public class App {
         new MainFrame();
     }
 
-    public static void Challenge7(){
+    public static void Challenge7(){ // 10주차
 
 
         class MainFrame extends JFrame {
@@ -1085,7 +1080,7 @@ public class App {
         new MainFrame();
     }
 
-    public static void Challenge8() {
+    public static void Challenge8() { //11주차
         class MainFrame extends JFrame {
             private JLabel resultLabel = new JLabel("계산 결과 출력");
 
