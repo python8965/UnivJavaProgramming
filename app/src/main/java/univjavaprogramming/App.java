@@ -26,7 +26,7 @@ public class App {
 
     public static void main(String[] args) {
         //TODO: 4주차부터는 설계랑 추가 사항 X 채울 것
-        Challenge4();
+        Challenge7();
         //Practice.week5();
     }
 
@@ -1023,7 +1023,24 @@ public class App {
                 public void paintComponent(Graphics g){
                     for (int i = 0; i < 4; i++){
                         for (int j = 0; j < 4; j++){
-                            g.drawImage(image, i * (imageWidth + 10), j * (imageHeight + 10), this);
+
+                            int resultImageWidth = 50;
+                            int resultImageHeight = 50;
+
+                            int dx1 = i * (resultImageWidth + 10);
+                            int dy1 = j * (resultImageHeight + 10);
+
+                            int dx2 = dx1 + resultImageWidth;
+                            int dy2 = dy1 + resultImageHeight;
+
+                            int sx1 = imageWidth / 4 * i;
+                            int sy1 = imageHeight / 4 * j;
+
+                            int sx2 = sx1 + imageWidth / 4;
+                            int sy2 = sy1 + imageHeight / 4;
+
+                            
+                            g.drawImage(image, dx1, dy1, dx2, dy2, sx1, sy1, sx2, sy2 , this);
                         }
                     }
 
@@ -1049,7 +1066,6 @@ public class App {
 
                     mainPanel.image = image;
                 } catch (Exception e){
-                    //exit
                     System.out.println(e.getMessage());
 
                 }
@@ -1067,7 +1083,8 @@ public class App {
 
                 contentPane.add(titlePanel, BorderLayout.SOUTH);
 
-                setSize(300, 300);
+                setSize(200 + 10 *4, 300);
+                setResizable(false);
 
                 setVisible(true);
             }
@@ -1080,7 +1097,7 @@ public class App {
         new MainFrame();
     }
 
-    public static void Challenge8() { //11주차
+    public static void Challenge8() { //11주차 챗지피티 MVP?
         class MainFrame extends JFrame {
             private JLabel resultLabel = new JLabel("계산 결과 출력");
 
@@ -1167,5 +1184,89 @@ public class App {
         }
 
         new MainFrame();
+    }
+
+    public static void Challenge9() { //12주차
+        interface Shape {
+            final double PI = 3.14;
+            void draw();
+            double getArea();
+            default public void redraw(){
+                System.out.print("--- 다시 그립니다. ");
+                draw();
+            }
+        }
+
+        class Circle implements Shape{
+            private int radius;
+
+            public Circle(int radius){
+                this.radius = radius;
+            }
+
+            @Override
+            public void draw(){
+                System.out.println("반지름이 " + radius + "인 원입니다.");
+            }
+
+            @Override
+            public double getArea(){
+                return PI * radius * radius;
+            }
+        }
+
+        class Oval implements Shape {
+            private int x;
+            private int y;
+
+            public Oval(int x, int y){
+                this.x = x;
+                this.y = y;
+            }
+
+            @Override
+            public void draw(){
+                System.out.println("x, y축이 " + x + "," + y + "인 타원입니다.");
+            }
+
+            @Override
+            public double getArea(){
+                return PI * x * y;
+            }
+        }
+
+        class Rect implements Shape {
+            private int x;
+            private int y;
+
+            public Rect(int x, int y){
+                this.x = x;
+                this.y = y;
+            }
+
+            @Override
+            public void draw(){
+                System.out.println("x, y축이 " + x + "," + y + "인 직사각형 입니다.");
+            }
+
+            @Override
+            public double getArea(){
+                return x * y;
+            }
+        }
+        
+
+        Shape[] list = new Shape[3];
+        list[0] = new Circle(5);
+        list[1] = new Oval(30, 50);
+        list[2] = new Rect(20, 40);
+
+        for (int i=0; i< list.length; i++){
+            list[i].redraw();
+        }
+
+        for (int i=0; i< list.length; i++) {
+            System.out.println("면적은 " + list[i].getArea());
+        }
     }
 }
