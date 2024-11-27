@@ -9,15 +9,11 @@ import javax.swing.event.*;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.Stack;
-import java.util.TreeMap;
 import java.util.List;
 
 import java.net.*;
 import java.util.*;
+import java.io.*;
 
 public class App {
 
@@ -80,7 +76,7 @@ public class App {
 
     class Helper {
         public static int randomRange(int start, int end) {
-            return (int) (Math.random() * (end - start - 1)) + start;
+            return (int) (Math.random() * (end - start) + 1) + start;
         }
     }
 
@@ -92,7 +88,7 @@ public class App {
 
             for (int i = 0; i < inputLottoNumber.length; i++) {
                 check: for (;;) {
-                    var num = Helper.randomRange(1, 45);
+                    var num = Helper.randomRange(1, 4);
 
                     if (num < 1 || num > 45) {
                         continue;
@@ -419,17 +415,12 @@ public class App {
             PacMan;
 
             public char ToIcon(){
-                switch (this) {
-                    case Empty:
-                        return '-';
-                    case Cookie:
-                        return 'C';
-                    case PacMan:
-                        return 'P';
-                
-                    default:
-                        return 'e';
-                }
+                return switch (this) {
+                    case Empty -> '-';
+                    case Cookie -> 'C';
+                    case PacMan -> 'P';
+                    default -> 'e';
+                };
             }
         }
 
@@ -597,7 +588,7 @@ public class App {
 
                 Objects.add(pacMan);
 
-                List<Position> positions = new ArrayList<Position>();
+                List<Position> positions = new ArrayList<>();
 
                 this.cookieCount = Helper.randomRange(2, 5);
 
@@ -723,13 +714,13 @@ public class App {
                 add(new JButton("계산"));
 
                 add(new JButton("+")).setBackground(Color.YELLOW);
-                ;
+                
                 add(new JButton("-")).setBackground(Color.YELLOW);
-                ;
+                
                 add(new JButton("*")).setBackground(Color.YELLOW);
-                ;
+                
                 add(new JButton("/")).setBackground(Color.YELLOW);
-                ;
+                
 
             }
         }
@@ -1235,5 +1226,65 @@ public class App {
         for (int i = 0; i < list.length; i++) {
             System.out.println("면적은 " + list[i].getArea());
         }
+    }
+
+    public static void Challenge10 () { //12주차
+        class Challenge{
+
+            String fileName = "/workspaces/UnivJavaProgramming/app/src/main/resources/phone.txt";
+            HashMap<String,String> phoneMap = new HashMap<String,String>();
+            
+            public Challenge(){
+
+            }
+
+            private void readPhoneFile(){
+                try {
+                    Scanner fScanner = new Scanner(new FileReader(new File(fileName)));
+
+                    while (fScanner.hasNextLine()){
+                        String line = fScanner.nextLine();
+                        String[] split = line.split(" ");
+                        phoneMap.put(split[0], split[1]);
+                    }
+                }catch (IOException e){
+                    System.out.println("파일을 읽는 도중 오류가 발생했습니다.");
+                }
+
+                System.out.println("총 "+ phoneMap.size() + "개의 전화번호를 읽었습니다.");
+            }
+
+            private void processQuery() {
+                Scanner scanner = new Scanner(System.in);
+
+                while (true) {
+                    System.out.print("이름 >> ");
+                    String name = scanner.next();
+
+                    if (name.equals("그만")) {
+                        break;
+                    }
+
+                    if (phoneMap.containsKey(name)) {
+                        System.out.println(phoneMap.get(name));
+                    } else {
+                        System.out.println(name+" 이라는 이름이 없습니다");
+                    }
+                }
+
+                scanner.close();
+            }
+
+            public void run() {
+                readPhoneFile();
+                processQuery();
+            }
+
+        
+        }
+        
+
+        Challenge phoneExplorer = new Challenge();
+        phoneExplorer.run();
     }
 }
