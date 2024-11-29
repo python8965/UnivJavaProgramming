@@ -5,7 +5,6 @@ package univjavaprogramming;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.event.*;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -19,7 +18,7 @@ public class App {
 
     public static void main(String[] args) {
         // TODO: 4주차부터는 설계랑 추가 사항 X 채울 것
-        Challenge4();
+        Challenge10();
         // Practice.week5();
     }
 
@@ -754,8 +753,110 @@ public class App {
     }
 
     public static void Challenge6() {// 9주차
+        class Calculator {
+            int getOrder(char c) {
+                switch (c) {
+                    case '+':
+                    case '-':
+                        return 0;
+                    case '*':
+                    case '/':
+                        return 1;
+                    default:
+                        return -1;
+                }
+            }
+
+            boolean isDigit(char c) {
+                return getOrder(c) == -1;
+            }
+            
+            String Calculate(String text) {
+                List<Character> postfixText = toPostFix(text);
+
+                System.out.println(postfixText.toString());
+
+                // 계산 파트
+                Stack<Integer> istack = new Stack<>();
+
+                try {
+
+                    for (var c : postfixText) {
+                        if (isDigit(c)) {
+
+                            int i = Integer.parseInt(Character.toString(c));
+
+                            istack.push(i);
+                        } else {
+                            int op2 = istack.pop();
+                            int op1 = istack.pop();
+
+                            switch (c) {
+                                case '+':
+                                    istack.push(op1 + op2);
+                                    break;
+                                case '-':
+                                    istack.push(op1 - op2);
+                                    break;
+                                case '/':
+                                    istack.push(op1 / op2);
+                                    break;
+                                case '*':
+                                    istack.push(op1 * op2);
+                                    break;
+                            }
+                        }
+                    }
+
+                    if (istack.size() != 1) {
+                        System.out.println(istack.toString());
+                        throw new Exception();
+                    }
+
+                    return istack.pop().toString();
+                } catch (Exception error) {
+                    return "에러: " + error.getMessage();
+
+                }
+            }
+
+            private List<Character> toPostFix(String text) {
+                var stack = new Stack<Character>();
+
+                List<Character> postfixText = new ArrayList<Character>();
+
+                for (var c : text.toCharArray()) {
+
+                    if (!isDigit(c)) {
+                        if (!stack.isEmpty()) {
+
+                            var token = stack.peek();
+
+                            if (getOrder(c) <= getOrder(token)) {
+                                postfixText.add(stack.pop());
+                                stack.add(c);
+                                continue;
+                            }
+                        }
+
+                        stack.add(c);
+                    } else {
+                        postfixText.add(c);
+                    }
+                }
+
+                while (!stack.isEmpty()) {
+                    postfixText.add(stack.pop());
+                }
+                return postfixText;
+            }
+        }
+        
+        
+        
+        
         class SouthPanel extends JPanel {
-            JTextField resultDocument;
+            final JTextField resultDocument;
 
             public SouthPanel() {
 
@@ -782,13 +883,11 @@ public class App {
                     var btn = new JButton("" + i);
 
                     btn.addActionListener(
-                            new ActionListener() {
-                                public void actionPerformed(ActionEvent e) {
-                                    JButton b = (JButton) e.getSource();
+                            e -> {
+                                JButton b = (JButton) e.getSource();
 
-                                    int i = Integer.parseInt(b.getText());
-                                    inputField.setText(inputField.getText() + i);
-                                }
+                                int i1 = Integer.parseInt(b.getText());
+                                inputField.setText(inputField.getText() + i1);
                             });
 
                     add(btn);
@@ -797,112 +896,21 @@ public class App {
                 var cebutton = new JButton("CE");
 
                 cebutton.addActionListener(
-                        new ActionListener() {
-                            public void actionPerformed(ActionEvent e) {
-                                inputField.setText("");
-                            }
-                        });
+                        e -> inputField.setText(""));
 
                 add(cebutton);
 
                 var calcbutton = new JButton("계산");
 
                 calcbutton.addActionListener(
-                        new ActionListener() {
-                            int getOrder(char c) {
-                                switch (c) {
-                                    case '+':
-                                    case '-':
-                                        return 0;
-                                    case '*':
-                                    case '/':
-                                        return 1;
-                                    default:
-                                        return -1;
-                                }
-                            }
+                        e -> {
 
-                            boolean isDigit(char c) {
-                                return getOrder(c) == -1;
-                            }
+                            // 후위 표기법 파트
 
-                            public void actionPerformed(ActionEvent e) {
+                            var text = inputField.getText();
 
-                                // 후위 표기법 파트
+                            resultField.setText(new Calculator().Calculate(text));
 
-                                var text = inputField.getText();
-                                var stack = new Stack<Character>();
-
-                                List<Character> postfixText = new ArrayList<Character>();
-
-                                for (var c : text.toCharArray()) {
-
-                                    if (!isDigit(c)) {
-                                        if (stack.size() != 0) {
-
-                                            var token = stack.peek();
-
-                                            if (getOrder(c) <= getOrder(token)) {
-                                                postfixText.add(stack.pop());
-                                                stack.add(c);
-                                                continue;
-                                            }
-                                        }
-
-                                        stack.add(c);
-                                    } else {
-                                        postfixText.add(c);
-                                    }
-                                }
-
-                                while (stack.size() != 0) {
-                                    postfixText.add(stack.pop());
-                                }
-
-                                System.out.println(postfixText.toString());
-
-                                // 계산 파트
-                                Stack<Integer> istack = new Stack<>();
-
-                                try {
-
-                                    for (var c : postfixText) {
-                                        if (isDigit(c)) {
-
-                                            int i = Integer.parseInt(Character.toString(c));
-
-                                            istack.push(i);
-                                        } else {
-                                            int op2 = istack.pop();
-                                            int op1 = istack.pop();
-
-                                            switch (c) {
-                                                case '+':
-                                                    istack.push(op1 + op2);
-                                                    break;
-                                                case '-':
-                                                    istack.push(op1 - op2);
-                                                    break;
-                                                case '/':
-                                                    istack.push(op1 / op2);
-                                                    break;
-                                                case '*':
-                                                    istack.push(op1 * op2);
-                                                    break;
-                                            }
-                                        }
-                                    }
-
-                                    if (istack.size() != 1) {
-                                        System.out.println(istack.toString());
-                                        throw new Exception();
-                                    }
-
-                                    resultField.setText(istack.pop().toString());
-                                } catch (Exception error) {
-                                    resultField.setText("에러: " + error.getMessage());
-                                }
-                            }
                         });
 
                 add(calcbutton);
@@ -1043,7 +1051,7 @@ public class App {
 
                 contentPane.add(titlePanel, BorderLayout.SOUTH);
 
-                setSize(200 + 10 * 4, 300);
+                setSize(200 + 10 * 4 + 5, 300);
                 setResizable(false);
 
                 setVisible(true);
@@ -1231,7 +1239,7 @@ public class App {
     public static void Challenge10 () { //12주차
         class Challenge{
 
-            String fileName = "/workspaces/UnivJavaProgramming/app/src/main/resources/phone.txt";
+            String fileName = "app/src/main/resources/phone.txt";
             HashMap<String,String> phoneMap = new HashMap<String,String>();
             
             public Challenge(){
