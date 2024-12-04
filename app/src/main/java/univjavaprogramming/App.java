@@ -11,6 +11,7 @@ import java.awt.event.*;
 import java.util.List;
 
 import java.net.*;
+import java.sql.*;
 import java.util.*;
 import java.io.*;
 
@@ -18,7 +19,7 @@ public class App {
 
     public static void main(String[] args) {
         // TODO: 4주차부터는 설계랑 추가 사항 X 채울 것
-        Challenge10();
+        Challenge11();
         // Practice.week5();
     }
 
@@ -1150,7 +1151,7 @@ public class App {
         new MainFrame();
     }
 
-    public static void Challenge9() { // 12주차
+    public static void Challenge9() { // 11주차
         interface Shape {
             final double PI = 3.14;
 
@@ -1294,5 +1295,50 @@ public class App {
 
         Challenge phoneExplorer = new Challenge();
         phoneExplorer.run();
+    }
+
+    public static void printTable(Statement stmt){
+        ResultSet srs;
+        System.out.printf("%4s|%-30s|%-30s|%-10s\n", "id", "title", "publisher", "author");
+        
+        try{
+            srs = stmt.executeQuery("select * from book");
+
+            while (srs.next()){
+                System.out.printf("%4s|%-30s|%-30s|%-10s\n", srs.getString("id"), srs.getString("title"), srs.getString("publisher"), srs.getString("author"));            
+            }
+        } catch (SQLException e) {
+            System.out.println("SQL 실행 에러");
+        }
+    }
+
+    public static void Challenge11(){ // 14주차
+        
+        
+        Connection conn;
+        Statement stmt = null;
+
+        final String SQLITE = "org.sqlite.JDBC";
+        final String DB = "jdbc:sqlite:book.db";
+
+        try {
+            Class.forName(SQLITE);
+            conn = DriverManager.getConnection(DB, "root", "1234");
+
+            System.out.println("DB 연결 완료");
+            stmt = conn.createStatement();
+
+            printTable(stmt);
+
+            System.out.println("수정 완료 ----");
+            stmt.execute("UPDATE book SET author='제인 오스틴' WHERE id=3");
+            
+            printTable(stmt);
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        } 
+        catch (ClassNotFoundException e){
+            System.out.println("classnotfound");
+        }
     }
 }
