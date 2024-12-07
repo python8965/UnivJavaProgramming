@@ -19,7 +19,7 @@ public class App {
 
     public static void main(String[] args) {
         // TODO: 4주차부터는 설계랑 추가 사항 X 채울 것
-        Challenge11();
+        Challenge4();
         // Practice.week5();
     }
 
@@ -408,7 +408,7 @@ public class App {
 
     }
 
-    public static void Challenge4() { // 5주차 TODO: 3걸음마다 Cookie 움직이게, 점수 표지 &클리어, wasd 외에 입력했을때 프로그램 끝나지 않게 하기.
+    public static void Challenge4() { // 5주차
         enum TileType {
             Empty,
             Cookie,
@@ -424,8 +424,13 @@ public class App {
             }
         }
 
-        record Position(int x, int y) {
-
+        record Position(int x, int y) implements Comparable<Position> {
+            @Override
+            public int compareTo(Position other) {
+                // x 좌표로 먼저 비교하고, 같으면 y 좌표로 비교
+                int xCompare = Integer.compare(this.x, other.x);
+                return xCompare != 0 ? xCompare : Integer.compare(this.y, other.y);
+            }
         }
 
         abstract class GameObject {
@@ -444,6 +449,7 @@ public class App {
 
             GameObject getAt(Position pos);
             void removeAt(Position pos);
+            void move(Position from, Position to);
         }
 
         abstract class TickAble extends GameObject {
@@ -492,8 +498,7 @@ public class App {
 
                 game.removeAt(movePos);
 
-                this.position = movePos;
-
+                game.move(this.position, movePos);
                 
             }
         }
@@ -519,8 +524,8 @@ public class App {
                     final var width = game.getWidth();
                     final var height = game.getHeight();
 
-                    var dx = Helper.randomRange(-1, 2);
-                    var dy = Helper.randomRange(-1, 2);
+                    var dx = Helper.randomRange(-2, 1);
+                    var dy = Helper.randomRange(-2, 1);
 
                     var movedX = position.x + dx;
                     var movedY = position.y + dy;
@@ -530,8 +535,10 @@ public class App {
                         return;
                     }
 
-                    position = new Position(movedX, movedY);
 
+
+                    var target = new Position(movedX, movedY);
+                    game.move(position, target);
                     count = 0;
                 }
             }
@@ -541,8 +548,8 @@ public class App {
 
             int Width;
             int Height;
-            
-            List<GameObject> Objects;
+
+            TreeMap<Position, GameObject> Objects;
 
             int cookieCount;
 
@@ -558,58 +565,65 @@ public class App {
 
             @Override
             public GameObject getAt(Position pos) {
-                for (var object : Objects) { 
-                    if (object.position == pos){
-                        return object;
-                    }
-                }
-
-                return null;
+                return Objects.getOrDefault(pos, null);
             }
 
             @Override
             public void removeAt(Position pos){
                 var removeTarget = getAt(pos);
 
-                if (removeTarget.getTileType() == TileType.Cookie){
+                if (removeTarget != null && removeTarget.getTileType() == TileType.Cookie){
                     cookieCount -= 1;
                 }
 
-                Objects.remove(removeTarget);
+                Objects.remove(pos);
+            }
+
+            @Override
+            public void move(Position from, Position to) {
+                var moveTarget = getAt(from);
+                moveTarget.position = to;
+
+                Objects.remove(from);
+                Objects.put(to, moveTarget);
             }
 
             public Game(int Width, int Height) {
                 this.Width = Width;
                 this.Height = Height;
 
-                Objects = new ArrayList<>();
+                Objects = new TreeMap<>();
 
-                var pacMan = new PacMan(new Position(0, 0));
+                var pacManPosition = new Position(0, 0);
+                var pacMan = new PacMan(pacManPosition);
 
-                Objects.add(pacMan);
+                Objects.put(pacManPosition, pacMan);
 
                 List<Position> positions = new ArrayList<>();
 
                 this.cookieCount = Helper.randomRange(2, 5);
 
                 for (int i = 0; i < this.cookieCount; i++) {
-                    var pos = new Position(Helper.randomRange(0, Width),
-                            Helper.randomRange(0, Height));
+                    var pos = new Position(Helper.randomRange(0, Width-1),
+                            Helper.randomRange(0, Height-1));
 
                     while (positions.contains(pos)) {
-                        pos = new Position(Helper.randomRange(0, Width),
-                                Helper.randomRange(0, Height));
+                        pos = new Position(Helper.randomRange(0, Width-1),
+                                Helper.randomRange(0, Height-1));
                     }
+
+                    System.out.println("debug pos " + pos);
 
                     positions.add(pos);
 
-                    Objects.add(new Cookie(pos));
-                    
+                    Objects.put(pos, new Cookie(pos));
                 }
             }
 
             public void input(int dx, int dy) {
-                for (var object : Objects) {
+
+
+                for (var object : Objects.values().toArray()) {
 
                     if (object instanceof InputAble) { //
                         ((InputAble) object).Input( this, dx, dy);
@@ -652,7 +666,7 @@ public class App {
 
         game.print();
 
-        while (game.cookieCount != 0) {
+        while (true) {
             var in = scanner.next();
 
             int dx = 0;
