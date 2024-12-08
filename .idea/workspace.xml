@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="134878bf-6473-44cd-bf08-69eb5244b30b" name="변경" comment="패널을 등록하셔야지">
+    <list default="true" id="134878bf-6473-44cd-bf08-69eb5244b30b" name="변경" comment="fix">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/univjavaprogramming/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/univjavaprogramming/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/book.db" beforeDir="false" afterPath="$PROJECT_DIR$/book.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,6 +70,8 @@
     "HTTP 요청.generated-requests | #1.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "android.gradle.sync.needed": "true",
     "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
@@ -85,6 +88,11 @@
     "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
     "show.migrate.to.gradle.popup": "false",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "sqlite"
+    ]
   }
 }]]></component>
   <component name="RunManager" selected="애플리케이션.App">
@@ -117,6 +125,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="HTTP 요청.generated-requests | #1" />
         <item itemvalue="애플리케이션.App" />
       </list>
     </recent_temporary>
@@ -149,7 +158,7 @@
       <workItem from="1730887072660" duration="5177000" />
       <workItem from="1732886134367" duration="120000" />
       <workItem from="1732886288846" duration="244000" />
-      <workItem from="1732886539657" duration="218000" />
+      <workItem from="1732886539657" duration="1856000" />
       <workItem from="1733546544714" duration="9000" />
       <workItem from="1733546557189" duration="3514000" />
     </task>
@@ -201,7 +210,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730887296552</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="fix">
+      <option name="closed" value="true" />
+      <created>1732887049428</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1732887049428</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -224,7 +241,8 @@
     <MESSAGE value="좌석예약픅로그램 완성" />
     <MESSAGE value="팩맨-쿠키 충돌&#10;쿠키-쿠키 충돌&#10;정도만 개발하면 될듯" />
     <MESSAGE value="local" />
-    <option name="LAST_COMMIT_MESSAGE" value="local" />
+    <MESSAGE value="fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -236,7 +254,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/univjavaprogramming/App.java</url>
-          <line>1045</line>
+          <line>1115</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

@@ -18,9 +18,7 @@ import java.io.*;
 public class App {
 
     public static void main(String[] args) {
-        // TODO: 4주차부터는 설계랑 추가 사항 X 채울 것
-        Challenge4();
-        // Practice.week5();
+        Challenge1(); // 원하는 챌린지 번호로 바꾸고 실행.
     }
 
     public static void Challenge1() { // 2주차
@@ -412,14 +410,16 @@ public class App {
         enum TileType {
             Empty,
             Cookie,
-            PacMan;
+            PacMan,
+            Enemy;
 
-            public char ToIcon(){
+            public String ToIcon(){
                 return switch (this) {
-                    case Empty -> '-';
-                    case Cookie -> 'C';
-                    case PacMan -> 'P';
-                    default -> 'e';
+                    case Empty -> "❌";
+                    case Cookie -> "👻";
+                    case PacMan -> "🅿️";
+                    case Enemy -> "💀";
+                    default -> "e";
                 };
             }
         }
@@ -544,6 +544,45 @@ public class App {
             }
         }
 
+        class Enemy extends TickAble {
+            int count = 0;
+
+            Enemy(Position position) {
+                super(position);
+            }
+
+            @Override
+            TileType getTileType() {
+                return TileType.Enemy;
+            }
+
+            @Override
+            void Tick(IGame game) {
+
+                count += 1;
+
+                if (count == 2) {
+                    final var width = game.getWidth();
+                    final var height = game.getHeight();
+
+                    var dx = Helper.randomRange(-2, 1);
+                    var dy = Helper.randomRange(-2, 1);
+
+                    var movedX = position.x + dx;
+                    var movedY = position.y + dy;
+
+                    if (movedX < 0 || movedX >= width || movedY < 0 || movedY >= height) {
+                        count = 0;
+                        return;
+                    }
+
+                    var target = new Position(movedX, movedY);
+                    game.move(position, target);
+                    count = 0;
+                }
+            }
+        }
+
         class Game implements IGame {
 
             int Width;
@@ -552,6 +591,7 @@ public class App {
             TreeMap<Position, GameObject> Objects;
 
             int cookieCount;
+            int Hp = 3;
 
             @Override
             public int getWidth(){
@@ -572,10 +612,15 @@ public class App {
             public void removeAt(Position pos){
                 var removeTarget = getAt(pos);
 
-                if (removeTarget != null && removeTarget.getTileType() == TileType.Cookie){
-                    cookieCount -= 1;
-                }
+                if (removeTarget != null) {
+                    if (removeTarget.getTileType() == TileType.Cookie) {
+                        cookieCount -= 1;
+                    }
 
+                    if (removeTarget.getTileType() == TileType.Enemy) {
+                        Hp -= 1;
+                    }
+                }
                 Objects.remove(pos);
             }
 
@@ -618,6 +663,24 @@ public class App {
 
                     Objects.put(pos, new Cookie(pos));
                 }
+
+                var enemyCount = Helper.randomRange(2, 5);
+
+                for (int i = 0; i < enemyCount; i++) {
+                    var pos = new Position(Helper.randomRange(0, Width-1),
+                            Helper.randomRange(0, Height-1));
+
+                    while (positions.contains(pos)) {
+                        pos = new Position(Helper.randomRange(0, Width-1),
+                                Helper.randomRange(0, Height-1));
+                    }
+
+                    System.out.println("debug pos " + pos);
+
+                    positions.add(pos);
+
+                    Objects.put(pos, new Enemy(pos));
+                }
             }
 
             public void input(int dx, int dy) {
@@ -644,9 +707,9 @@ public class App {
                         var find = this.getAt(new Position(x, y));
 
                         if (find != null){
-                            System.out.printf("%c", find.getTileType().ToIcon());
+                            System.out.printf("%s", find.getTileType().ToIcon());
                         } else {
-                            System.out.printf("%c", TileType.Empty.ToIcon());
+                            System.out.printf("%s", TileType.Empty.ToIcon());
                         }
                         
 
@@ -698,6 +761,11 @@ public class App {
 
             if (game.cookieCount == 0){
                 System.out.println("game clear");
+                break;
+            }
+
+            if (game.Hp == 0){
+                System.out.println("you died");
                 break;
             }
 
@@ -1077,7 +1145,7 @@ public class App {
         new MainFrame();
     }
 
-    public static void Challenge8() { // 11주차 챗지피티 MVP?
+    public static void Challenge8() { // 11주차
         class MainFrame extends JFrame {
             private JLabel resultLabel = new JLabel("계산 결과 출력");
 
@@ -1165,7 +1233,7 @@ public class App {
         new MainFrame();
     }
 
-    public static void Challenge9() { // 11주차
+    public static void Challenge9() { // 12주차
         interface Shape {
             final double PI = 3.14;
 
@@ -1251,7 +1319,7 @@ public class App {
         }
     }
 
-    public static void Challenge10 () { //12주차
+    public static void Challenge10 () { //13주차
         class Challenge{
 
             String fileName = "app/src/main/resources/phone.txt";
@@ -1282,17 +1350,40 @@ public class App {
 
                 while (true) {
                     System.out.print("이름 >> ");
-                    String name = scanner.next();
-
+                    String name = scanner.nextLine();
                     if (name.equals("그만")) {
                         break;
                     }
 
-                    if (phoneMap.containsKey(name)) {
-                        System.out.println(phoneMap.get(name));
-                    } else {
-                        System.out.println(name+" 이라는 이름이 없습니다");
+                    var splitted = name.split(" ");
+
+
+                    switch (splitted[0]){
+                        case "생성":
+                            if (phoneMap.containsKey(splitted[1])) {
+                                System.out.println("이미 생성하고자 하는 대상이 데이터상에 있습니다.");
+                            } else {
+                                phoneMap.put(splitted[1], splitted[2]);
+                            }
+                            break;
+                        case "조회":
+                            if (phoneMap.containsKey(splitted[1])) {
+                                System.out.println(phoneMap.get(splitted[1]));
+                            } else {
+                                System.out.println(splitted[1]+" 이라는 이름이 없습니다");
+                            }
+                            break;
+                        case "삭제":
+                            if (!phoneMap.containsKey(splitted[1])) {
+                                System.out.println("삭제하고자 하는 대상이 데이터상에 없습니다.");
+                            } else {
+                                phoneMap.remove(splitted[1]);
+                            }
+                            break;
+                        default:
+                            System.out.println(splitted[0] + " 이라는 명령어는 지원되지 않습니다.");
                     }
+
                 }
 
                 scanner.close();
